@@ -47,6 +47,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    height: 60px;
 }
 
 .logo {
@@ -57,16 +58,13 @@ nav {
     background-clip: text;
     color: transparent;
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 40px;
 }
 
 .logo:hover {
     transform: scale(1.1);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    height: 40px;
 }
 
 .logo-path {
@@ -89,17 +87,6 @@ nav {
         opacity: 1;
         stroke-width: 4;
     }
-}
-
-/* Убедимся что навигация выглядит сбалансированно */
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    height: 60px;
 }
 
 .nav-links {
@@ -325,7 +312,7 @@ h1 {
 
 .photo-frame {
     width: 100%;
-    height: 400px;
+    height: 470px;
     background: linear-gradient(45deg, var(--deep-purple), var(--neon-orange));
     border-radius: 15px;
     display: flex;
@@ -439,6 +426,9 @@ h2::after {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
 }
 
 .project-card::before {
@@ -460,6 +450,11 @@ h2::after {
     transform: translateY(-5px);
     border-color: var(--neon-orange);
     box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+}
+
+.project-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .project-icon {
@@ -595,40 +590,6 @@ h2::after {
     }
 }
 
-@keyframes slideInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Анимации для проектов */
-.project-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
-
-.project-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 /* Иконки для языков программирования */
 .fa-golang {
     color: #00ADD8;
@@ -707,568 +668,6 @@ h2::after {
     transform: translateY(0);
 }
 
-
-/* Для оформления проектов */
-.project-details {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--gray-text);
-}
-
-.detail-item i {
-    color: var(--neon-orange);
-    width: 16px;
-    text-align: center;
-}
-
-.project-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0;
-}
-
-.feature-tag {
-    background: rgba(255, 107, 53, 0.15);
-    color: var(--neon-orange);
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    border: 1px solid rgba(255, 107, 53, 0.3);
-    transition: all 0.3s ease;
-}
-
-.feature-tag:hover {
-    background: rgba(255, 107, 53, 0.25);
-    transform: translateY(-1px);
-}
-
-.api-endpoints {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.endpoint-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.endpoint-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-}
-
-.method {
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.7rem;
-    min-width: 50px;
-    text-align: center;
-}
-
-.method.get { background: #61affe; color: white; }
-.method.post { background: #49cc90; color: white; }
-.method.patch { background: #fca130; color: white; }
-.method.delete { background: #f93e3e; color: white; }
-
-.path {
-    color: var(--gray-text);
-    font-family: monospace;
-}
-
-.status-codes {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.status-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.status-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.4rem;
-    font-size: 0.75rem;
-}
-
-.status {
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.7rem;
-    min-width: 40px;
-    text-align: center;
-    color: white;
-}
-
-.status.success { background: #49cc90; }
-.status.created { background: #61affe; }
-.status.no-content { background: #fca130; }
-.status.client-error { background: #f93e3e; }
-
-.status-desc {
-    color: var(--gray-text);
-    flex: 1;
-}
-
-.method.put { background: #fca130; color: white; }
-
-.database-schema {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.schema-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.schema-item {
-    margin-bottom: 1rem;
-}
-
-.table-name {
-    display: inline-block;
-    background: rgba(255, 107, 53, 0.2);
-    color: var(--neon-orange);
-    padding: 0.3rem 0.8rem;
-    border-radius: 6px;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.table-columns {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.column {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.4rem 0.8rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    font-size: 0.8rem;
-}
-
-.column-name {
-    color: var(--light-text);
-    font-family: monospace;
-}
-
-.column-type {
-    color: var(--gray-text);
-    font-family: monospace;
-    font-size: 0.75rem;
-}
-
-.repository-methods {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.methods-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.method-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-    padding: 0.3rem 0;
-}
-
-.method-icon {
-    width: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.method-name {
-    color: var(--light-text);
-    font-family: monospace;
-    min-width: 100px;
-}
-
-.method-desc {
-    color: var(--gray-text);
-    flex: 1;
-}
-
-.redis-features {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.features-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-}
-
-.feature-icon {
-    width: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.feature-desc {
-    color: var(--gray-text);
-    flex: 1;
-}
-
-.use-cases {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.cases-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.case-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--gray-text);
-}
-
-.case-item i {
-    color: var(--neon-orange);
-    width: 16px;
-    text-align: center;
-    font-size: 0.8rem;
-}
-
-.data-model {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.model-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.model-item {
-    display: grid;
-    grid-template-columns: 100px 150px 1fr;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    padding: 0.3rem 0;
-    align-items: center;
-}
-
-.field-name {
-    color: var(--neon-orange);
-    font-family: monospace;
-    font-weight: bold;
-}
-
-.field-type {
-    color: var(--light-text);
-    font-family: monospace;
-    background: rgba(255, 107, 53, 0.1);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.field-desc {
-    color: var(--gray-text);
-    font-size: 0.7rem;
-}
-
-.mongo-features {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.mongo-features h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.security-features {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.security-features h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.user-model {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.user-model h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.response-codes {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.codes-group h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.code-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.4rem;
-    font-size: 0.75rem;
-}
-
-.code-desc {
-    color: var(--gray-text);
-    flex: 1;
-}
-
-/* Добавляем статус для API endpoints */
-.endpoint-item .status {
-    margin-left: auto;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: white;
-}
-
-.status.success { background: #49cc90; }
-.status.created { background: #61affe; }
-.status.client-error { background: #f93e3e; }
-
-.token-structure {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.token-structure h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.claim-item {
-    display: grid;
-    grid-template-columns: 80px 100px 1fr;
-    gap: 0.8rem;
-    margin-bottom: 0.4rem;
-    font-size: 0.75rem;
-    padding: 0.3rem 0;
-    align-items: center;
-}
-
-.claim-name {
-    color: var(--neon-orange);
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 0.8rem;
-}
-
-.claim-type {
-    color: var(--light-text);
-    font-family: monospace;
-    background: rgba(255, 107, 53, 0.1);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 0.7rem;
-}
-
-.claim-desc {
-    color: var(--gray-text);
-    font-size: 0.7rem;
-}
-
-.access-control {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.access-control h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.rule-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--gray-text);
-}
-
-.rule-item i {
-    color: var(--neon-orange);
-    width: 16px;
-    text-align: center;
-    font-size: 0.8rem;
-}
-
-.rule-item strong {
-    color: var(--light-text);
-}
-
-.architecture-layers {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.architecture-layers h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.layer-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.8rem;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    border-left: 3px solid var(--neon-orange);
-}
-
-.layer-name {
-    color: var(--neon-orange);
-    font-weight: bold;
-    font-size: 0.85rem;
-    min-width: 100px;
-    font-family: monospace;
-}
-
-.layer-desc {
-    color: var(--gray-text);
-    font-size: 0.75rem;
-    flex: 1;
-}
-
-.http-methods {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
-}
-
-.http-methods h5 {
-    color: var(--light-text);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-}
-
-.method-pair {
-    display: grid;
-    grid-template-columns: 100px 80px 1fr;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    padding: 0.4rem 0;
-    align-items: center;
-}
-
-.crud-operation {
-    color: var(--light-text);
-    font-weight: 500;
-    font-size: 0.8rem;
-}
-
-.http-method {
-    color: var(--neon-orange);
-    font-family: monospace;
-    background: rgba(255, 107, 53, 0.1);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.status-code {
-    color: var(--gray-text);
-    font-size: 0.7rem;
-    font-family: monospace;
-}
-
-.fa-server {
-    color: #5382A1; /* Java blue color */
-}
-
-.project-tech {
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-    /*gap: 0.4rem;*/
-    /*margin-top: 0.8rem;*/
-}
-
 .tech-divider {
     height: 1px;
     background: rgba(255, 107, 53, 0.2);
@@ -1286,4 +685,8 @@ h2::after {
     border: 1px solid rgba(255, 107, 53, 0.3);
     margin: 0.2rem 0.2rem 0 0;
     white-space: nowrap;
+}
+
+.fa-server {
+    color: #5382A1;
 }
