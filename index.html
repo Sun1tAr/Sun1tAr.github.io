@@ -5,1045 +5,1376 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Денис Туев | Архитектор серверной логики</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Базовые стили и CSS переменные для цветов */
-        :root {
-            --deep-purple: #2D1B69;
-            --dark-bg: #0F0B23;
-            --darker-bg: #090616;
-            --neon-orange: #FF6B35;
-            --neon-orange-light: #FF8E53;
-            --light-text: #FFFFFF;
-            --gray-text: #B0B0B0;
-            --gray-dark: #2A2A2A;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Стили навигации */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 11, 35, 0.95);
-            padding: 1.5rem 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-weight: bold;
-            font-size: 1.5rem;
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.1);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--light-text);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--neon-orange);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--neon-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            color: var(--light-text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Стили секций */
-        section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Hero Section */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--dark-bg) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 107, 53, 0.1) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .circuit-animation {
-            position: relative;
-            width: 200px;
-            height: 200px;
-        }
-
-        .circuit-line {
-            position: absolute;
-            background: var(--neon-orange);
-            opacity: 0.3;
-        }
-
-        .circuit-line:nth-child(1) {
-            top: 0;
-            left: 50%;
-            width: 2px;
-            height: 100px;
-            transform: translateX(-50%);
-        }
-
-        .circuit-line:nth-child(3) {
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            height: 100px;
-            transform: translateX(-50%);
-        }
-
-        .circuit-node {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background: var(--neon-orange);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--light-text), var(--neon-orange));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: slideInFromLeft 1s ease-out;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--gray-text);
-            margin-bottom: 2rem;
-            animation: slideInFromLeft 1s ease-out 0.2s both;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray-text);
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        /* Кнопки */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-right: 1rem;
-            margin-bottom: 1rem;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
-            color: var(--dark-bg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--neon-orange);
-            color: var(--neon-orange);
-            background: transparent;
-        }
-
-        .btn-secondary:hover {
-            background: var(--neon-orange);
-            color: var(--dark-bg);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .telegram-btn {
-            background: linear-gradient(45deg, #0088cc, #00a2e8);
-        }
-
-        .telegram-btn:hover {
-            box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .photo-placeholder {
-            position: relative;
-        }
-
-        .photo-frame {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(45deg, var(--deep-purple), var(--neon-orange));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            color: var(--light-text);
-            border: 3px solid transparent;
-            background-clip: padding-box;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, var(--neon-orange), var(--deep-purple), var(--neon-orange));
-            border-radius: 15px;
-            z-index: -1;
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .goal-box {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(45, 27, 105, 0.3));
-            border-left: 4px solid var(--neon-orange);
-            padding: 2rem;
-            margin-top: 2rem;
-            border-radius: 0 10px 10px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .goal-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-orange), transparent);
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--light-text);
-            text-align: center;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
-            border-radius: 2px;
-        }
-
-        /* Projects Section */
-        #projects {
-            background: var(--darker-bg);
-        }
-
-        .projects-group {
-            margin-bottom: 4rem;
-        }
-
-        .group-title {
-            font-size: 1.8rem;
-            color: var(--light-text);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-left: 4px solid var(--neon-orange);
-            padding-left: 1rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, rgba(45, 27, 105, 0.3), rgba(15, 11, 35, 0.6));
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .project-card:hover::before {
-            left: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-orange);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
-        }
-
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card h4 {
-            font-size: 1.3rem;
-            color: var(--light-text);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card p {
-            color: var(--gray-text);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .project-tech {
-            display: inline-block;
-            background: rgba(255, 107, 53, 0.1);
-            color: var(--neon-orange);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-        }
-
-        /* Resume Section */
-        .resume-preview {
-            background: linear-gradient(135deg, rgba(45, 27, 105, 0.3), rgba(15, 11, 35, 0.6));
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .skill-category {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-orange);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .skill-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .skill-category h3 {
-            color: var(--neon-orange);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-category p {
-            color: var(--gray-text);
-            line-height: 1.5;
-        }
-
-        /* Contacts Section */
-        #contacts {
-            text-align: center;
-            background: var(--darker-bg);
-        }
-
-        .contact-links {
-            margin-top: 3rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            color: var(--gray-text);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
-
-        .contact-link:hover {
-            color: var(--neon-orange);
-            background: rgba(255, 107, 53, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Анимации */
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInFromBottom {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Анимации для проектов */
-        .project-card {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .project-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Иконки для языков программирования */
-        .fa-golang {
-            color: #00ADD8;
-        }
-
-        .fa-java {
-            color: #5382A1;
-        }
-
-        .fa-star {
-            color: var(--neon-orange);
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .hero-bg {
-                display: none;
-            }
-
-            .btn {
-                display: block;
-                width: 100%;
-                text-align: center;
-                margin-right: 0;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .group-title {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Стили для активного состояния навигации */
-        .nav-active {
-            background: rgba(15, 11, 35, 0.98) !important;
-        }
-
-        /* Стили для появления элементов при скролле */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <!-- Навигация -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">DT</div>
-            <div class="nav-links">
-                <a href="#hero">Главная</a>
-                <a href="#about">Обо мне</a>
-                <a href="#projects">Проекты</a>
-                <a href="#resume">Резюме</a>
-                <a href="#contacts">Контакты</a>
-            </div>
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
+<!-- Навигация -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 181 185" fill="none" style="display: inline-block;">
+                <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#FF8E53;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <path
+                        d="M180.007 75.9292C177.037 74.6192 165.067 67.2892 148.087 63.1092C142.204 61.661 134.167 61.6092 122.167 66.0542C110.167 70.4992 94.3266 80.0692 82.5366 86.4842C63.8828 96.6339 53.6966 99.5892 48.3816 100.259C41.7466 99.6092 35.3666 97.9392 29.5516 94.2942C26.3766 91.6392 22.7466 87.3492 19.0066 83.9292"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M84.0066 129.232C88.6566 126.582 95.3066 117.952 99.4966 98.1372C100.309 94.294 100.007 93.2522 99.5116 93.2372C97.736 93.1834 96.0166 101.502 94.5166 122.387C93.469 136.974 94.0066 159.772 94.6666 171.667C95.3266 183.562 96.6466 183.892 98.6466 183.402C103.287 181.592 110.627 177.262 121.257 169.627C127.267 164.962 134.527 158.692 142.007 152.232"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M65.0066 28.2322C69.9866 27.5722 77.9666 25.5722 83.4866 25.0672C90.0227 24.4693 98.6066 22.9122 106.147 21.7372C111.607 20.2522 115.997 18.9022 118.652 18.0722C120.317 17.5722 122.627 16.9122 127.007 17.2322"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M65.6421 27.2878C65.4472 27.8755 64.2716 30.2237 62.204 34.0665C59.8134 38.5097 59.3419 43.9111 59.4866 46.5177C59.7066 50.4789 66.8059 51.1121 70.3547 51.2613C73.8118 51.4066 78.8982 50.1433 82.7129 47.8749C86.9447 45.3585 88.5627 41.2882 90.4486 39.6474C90.7397 39.3941 91.0378 39.1084 91.091 39.2014C91.9934 40.7806 90.453 43.3262 91.4809 45.543C92.0937 46.8646 94.7683 47.2724 97.8638 47.5677C100.462 47.8156 102.749 47.4732 106.031 46.6417C111.635 45.2217 116.041 43.341 118.104 42.3102C121.824 40.4514 125.478 35.688 128.058 31.7301C129.885 28.9265 130.221 22.2133 131.113 18.9244C131.214 18.5301 131.214 18.0427 131.311 17.5967C131.409 17.1507 131.604 16.7608 131.214 16.6545"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M129.146 16.9499C129.341 16.9499 129.536 16.9499 129.978 16.8524C130.419 16.7549 131.102 16.56 130.478 16.4596C129.855 16.3591 127.906 16.3591 126.488 16.6545"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M72.7309 26.9924C72.7309 27.7722 70.9764 31.3904 68.5618 36.264C67.7699 37.8623 68.389 37.921 68.8838 37.8723C70.7056 37.6928 72.4238 36.645 76.0154 34.1905C76.9181 33.5736 77.445 32.9116 77.6975 32.8052C78.9342 32.2846 73.1563 40.3312 70.9617 44.3143C70.2705 45.5976 69.6827 46.7761 68.8941 47.9591C68.6962 48.2559 68.5013 48.5484 68.3004 49.145"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M68.5958 4.24906C67.7097 8.27788 68.0996 10.4459 68.9842 12.0689C70.5839 15.004 73.2153 14.6815 75.28 15.2249C79.2392 16.2671 83.6241 16.0638 88.127 15.3283C88.8779 15.2057 89.3602 15.1777 91.9018 14.4954C94.4434 13.8131 99.0246 12.4485 103.042 10.7708C107.059 9.0931 110.373 7.14367 112.86 5.55459C115.347 3.96551 116.906 2.79585 118.513 1.00002"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M4.50092 67.1624C5.0887 67.2599 11.7256 70.5769 16.7498 73.7521C17.3217 74.1135 17.6862 74.3458 18.2282 74.2513C22.6897 71.1233 28.4198 66.3768 29.6515 65.6886C29.9971 65.4907 30.387 65.2957 31.084 64.7995"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+                <path
+                        d="M2.13798 58.3014C2.13798 57.817 1.74809 55.4541 1.05693 52.6023C0.517943 50.3784 3.89246 47.3905 8.07931 44.3792C9.56521 43.3105 11.0906 43.0427 12.3193 42.7473C13.9072 42.3656 15.7131 43.6275 17.4912 44.7588C19.2873 45.9014 20.4449 47.3669 20.7964 48.3549C20.8557 48.5217 20.2618 48.3593 20.1584 48.0167C19.3853 45.4544 25.6434 42.4638 29.3502 41.2705C31.5717 40.5554 34.2268 42.9364 36.1969 45.4913C37.9108 47.714 37.2868 50.7104 36.3564 52.9272C35.6209 53.9595 34.7318 54.949 33.9447 55.8823C33.6449 56.3283 33.5474 56.7182 33.447 57.1199"
+                        stroke="url(#logoGradient)"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        class="logo-path"/>
+            </svg>
         </div>
-    </nav>
+        <div class="nav-links">
+            <a href="#hero">Главная</a>
+            <a href="#about">Обо мне</a>
+            <a href="#projects">Проекты</a>
+            <a href="#resume">Резюме</a>
+            <a href="#contacts">Контакты</a>
+        </div>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-content">
-            <h1>Денис Туев</h1>
-            <p class="subtitle">Архитектор серверной логики</p>
-            <p class="subtitle">Превращаю сложные задачи в элегантные решения на Java. Где техника встречается с творчеством.</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
-                <a href="#contacts" class="btn btn-secondary">Написать в Telegram</a>
-            </div>
+<!-- Hero Section -->
+<section id="hero">
+    <div class="hero-content">
+        <h1>Денис Туев</h1>
+        <p class="subtitle">Архитектор серверной логики</p>
+        <p class="subtitle">Превращаю сложные задачи в элегантные решения на Java. Где техника встречается с творчеством.</p>
+        <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
+            <a href="#contacts" class="btn btn-secondary">Написать в Telegram</a>
         </div>
-        <div class="hero-bg">
-            <div class="circuit-animation">
-                <div class="circuit-line"></div>
-                <div class="circuit-node"></div>
-                <div class="circuit-line"></div>
-            </div>
+    </div>
+    <div class="hero-bg">
+        <div class="circuit-animation">
+            <div class="circuit-line"></div>
+            <div class="circuit-node"></div>
+            <div class="circuit-line"></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>Не просто код, а система</h2>
-        <div class="about-content">
-            <div class="photo-placeholder">
-                <div class="photo-frame">
-                    <span>[Фото в поле с фотиком]</span>
-                </div>
-            </div>
-            <div class="about-text">
-                <p>Меня влечет бэкенд потому, что это место, где аналитическое мышление встречается с чувством прекрасного. Где можно решить до безумия сложную задачу одним элегантным паттерном. Это необъятный мир, в котором всегда есть чему учиться, и это меня вдохновляет.</p>
-                <br>
-                <p>Мой опыт проектировщика в энергетике не прошел даром. Я мыслю системами. Для меня надежность, четкая документация и итеративный подход — не просто слова, а основа создания по-настоящему стабильных и предсказуемых приложений. По сути, я просто сменил один тип сложных систем на другой.</p>
-                <div class="goal-box">
-                    <p>Моя цель на год — присоединиться к команде Java-разработчиков, где я смогу применять свои знания, расти и вносить вклад в реальные проекты. Готов изучать новые технологии в процессе!</p>
-                </div>
+<!-- About Section -->
+<section id="about">
+    <h2>Не просто код, а система</h2>
+    <div class="about-content">
+        <div class="photo-placeholder">
+            <div class="photo-frame">
+                <span>[Фото в поле с фотиком]</span>
             </div>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Лаборатория идей</h2>
-        <p class="section-subtitle">Здесь я оттачиваю мастерство через практику и пет-проекты</p>
-        
-        <!-- Учебные проекты Go -->
-        <div class="projects-group">
-            <h3 class="group-title">
-                <i class="fab fa-golang"></i>
-                Учебные проекты на Go
-            </h3>
-            <div class="projects-grid">
-                <div class="project-card" onclick="openProject('MIREA-TIP-Practice-1')">
-                    <div class="project-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h4>Practice 1</h4>
-                    <p>Основы синтаксиса Go, работа с переменными и функциями</p>
-                    <div class="project-tech">Go • Basics • Syntax</div>
-                </div>
-                <div class="project-card" onclick="openProject('MIREA-TIP-Practice-2')">
-                    <div class="project-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h4>Practice 2</h4>
-                    <p>Структуры данных и методы в Go</p>
-                    <div class="project-tech">Go • Structs • Methods</div>
-                </div>
-                <div class="project-card" onclick="openProject('MIREA-TIP-Practice-3')">
-                    <div class="project-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h4>Practice 3</h4>
-                    <p>Интерфейсы и полиморфизм в Go</p>
-                    <div class="project-tech">Go • Interfaces • Polymorphism</div>
-                </div>
-                <div class="project-card" onclick="openProject('MIREA-TIP-Practice-4')">
-                    <div class="project-icon">
-                        <i class="fas fa-concierge-bell"></i>
-                    </div>
-                    <h4>Practice 4</h4>
-                    <p>Конкурентность и горутины</p>
-                    <div class="project-tech">Go • Goroutines • Concurrency</div>
-                </div>
+        <div class="about-text">
+            <p>Меня влечет бэкенд потому, что это место, где аналитическое мышление встречается с чувством прекрасного. Где можно решить до безумия сложную задачу одним элегантным паттерном. Это необъятный мир, в котором всегда есть чему учиться, и это меня вдохновляет.</p>
+            <br>
+            <p>Мой опыт проектировщика в энергетике не прошел даром. Я мыслю системами. Для меня надежность, четкая документация и итеративный подход — не просто слова, а основа создания по-настоящему стабильных и предсказуемых приложений. По сути, я просто сменил один тип сложных систем на другой.</p>
+            <div class="goal-box">
+                <p>Моя цель на год — присоединиться к команде Java-разработчиков, где я смогу применять свои знания, расти и вносить вклад в реальные проекты. Готов изучать новые технологии в процессе!</p>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- Учебные проекты Java -->
-        <div class="projects-group">
-            <h3 class="group-title">
-                <i class="fab fa-java"></i>
-                Учебные проекты на Java
-            </h3>
-            <div class="projects-grid">
-                <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-1')">
-                    <div class="project-icon">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <h4>Practice 1</h4>
-                    <p>Java реализация базовых алгоритмов и структур данных</p>
-                    <div class="project-tech">Java • OOP • Algorithms</div>
+<!-- Projects Section -->
+<section id="projects">
+    <h2>Лаборатория идей</h2>
+    <p class="section-subtitle">Здесь я оттачиваю мастерство через практику и пет-проекты</p>
+
+    <!-- Учебные проекты Java -->
+    <div class="projects-group">
+        <h3 class="group-title">
+            <i class="fab fa-java"></i>
+            Учебные проекты на Java
+        </h3>
+        <div class="projects-grid">
+            <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-1')">
+                <div class="project-icon">
+                    <i class="fas fa-coffee"></i>
                 </div>
-                <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-2')">
-                    <div class="project-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h4>Practice 2</h4>
-                    <p>Работа с коллекциями и потоками в Java</p>
-                    <div class="project-tech">Java • Collections • Streams</div>
+                <h4>Practice 1</h4>
+                <p>Java реализация базовых алгоритмов и структур данных</p>
+                <div class="project-tech">Java • OOP • Algorithms</div>
+            </div>
+            <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-2')">
+                <div class="project-icon">
+                    <i class="fas fa-database"></i>
                 </div>
-                <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-3')">
-                    <div class="project-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <h4>Practice 3</h4>
-                    <p>Многопоточность и синхронизация в Java</p>
-                    <div class="project-tech">Java • Multithreading • Sync</div>
+                <h4>Practice 2</h4>
+                <p>Работа с коллекциями и потоками в Java</p>
+                <div class="project-tech">Java • Collections • Streams</div>
+            </div>
+            <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-3')">
+                <div class="project-icon">
+                    <i class="fas fa-network-wired"></i>
                 </div>
-                <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-4')">
-                    <div class="project-icon">
-                        <i class="fas fa-plug"></i>
-                    </div>
-                    <h4>Practice 4</h4>
-                    <p>REST API и веб-сервисы на Spring Boot</p>
-                    <div class="project-tech">Java • Spring Boot • REST</div>
+                <h4>Practice 3</h4>
+                <p>Многопоточность и синхронизация в Java</p>
+                <div class="project-tech">Java • Multithreading • Sync</div>
+            </div>
+            <div class="project-card" onclick="openProject('MIREA-FFJ-Practice-4')">
+                <div class="project-icon">
+                    <i class="fas fa-plug"></i>
                 </div>
+                <h4>Practice 4</h4>
+                <p>REST API и веб-сервисы на Spring Boot</p>
+                <div class="project-tech">Java • Spring Boot • REST</div>
             </div>
         </div>
+    </div>
 
-        <!-- Пет-проекты -->
-        <div class="projects-group">
-            <h3 class="group-title">
-                <i class="fas fa-star"></i>
-                Пет-проекты
-            </h3>
-            <div class="projects-grid">
-                <div class="project-card" onclick="openProject('Pet-TaskManager-BackEnd')">
-                    <div class="project-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h4>Task Manager</h4>
-                    <p>Backend для системы управления задачами с аутентификацией</p>
-                    <div class="project-tech">Java • Spring Boot • PostgreSQL • JWT</div>
+    <!-- Пет-проекты -->
+    <div class="projects-group">
+        <h3 class="group-title">
+            <i class="fas fa-star"></i>
+            Пет-проекты
+        </h3>
+        <div class="projects-grid">
+            <div class="project-card" onclick="openProject('Pet-TaskManager-BackEnd')">
+                <div class="project-icon">
+                    <i class="fas fa-tasks"></i>
                 </div>
-                <div class="project-card" onclick="openProject('Pet-ECommerce-BackEnd')">
-                    <div class="project-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h4>E-Commerce</h4>
-                    <p>Backend для интернет-магазина с микросервисной архитектурой</p>
-                    <div class="project-tech">Java • Microservices • Docker • Redis</div>
+                <h4>Task Manager</h4>
+                <p>Backend для системы управления задачами с аутентификацией</p>
+                <div class="project-tech">Java • Spring Boot • PostgreSQL • JWT</div>
+            </div>
+            <div class="project-card" onclick="openProject('Pet-ECommerce-BackEnd')">
+                <div class="project-icon">
+                    <i class="fas fa-shopping-cart"></i>
                 </div>
-                <div class="project-card" onclick="openProject('Pet-Analytics-Architecture')">
-                    <div class="project-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h4>Analytics Platform</h4>
-                    <p>Архитектура системы аналитики в реальном времени</p>
-                    <div class="project-tech">Architecture • Kafka • ClickHouse • Grafana</div>
+                <h4>E-Commerce</h4>
+                <p>Backend для интернет-магазина с микросервисной архитектурой</p>
+                <div class="project-tech">Java • Microservices • Docker • Redis</div>
+            </div>
+            <div class="project-card" onclick="openProject('Pet-Analytics-Architecture')">
+                <div class="project-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="project-card" onclick="openProject('Pet-ChatApp-BackEnd')">
-                    <div class="project-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h4>Chat Application</h4>
-                    <p>Backend для мессенджера с WebSocket соединениями</p>
-                    <div class="project-tech">Java • WebSocket • MongoDB • Spring Security</div>
+                <h4>Analytics Platform</h4>
+                <p>Архитектура системы аналитики в реальном времени</p>
+                <div class="project-tech">Architecture • Kafka • ClickHouse • Grafana</div>
+            </div>
+            <div class="project-card" onclick="openProject('Pet-ChatApp-BackEnd')">
+                <div class="project-icon">
+                    <i class="fas fa-comments"></i>
                 </div>
+                <h4>Chat Application</h4>
+                <p>Backend для мессенджера с WebSocket соединениями</p>
+                <div class="project-tech">Java • WebSocket • MongoDB • Spring Security</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Resume Section -->
-    <section id="resume">
-        <h2>Опыт и компетенции</h2>
-        <div class="resume-preview">
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Основной стек</h3>
-                    <p>Java, Spring Boot, Hibernate, PostgreSQL, Docker, Maven</p>
+    <!-- Учебные проекты Go -->
+    <!-- Учебные проекты Go -->
+    <div class="projects-group">
+        <h3 class="group-title">
+            <i class="fab fa-golang"></i>
+            Учебные проекты на Go
+        </h3>
+        <div class="projects-grid">
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-1')">
+                <div class="project-icon">
+                    <i class="fab fa-golang"></i>
                 </div>
-                <div class="skill-category">
-                    <div class="skill-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Образование</h3>
-                    <p>МИРЭА (Магистратура, Промышленное программирование) 2023-2027</p>
-                </div>
-                <div class="skill-category">
-                    <div class="skill-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Опыт работы</h3>
-                    <p>ЕНТЦ "НЭК ТЕК" - Мл. инженер отдела алгоритмов (Сен 2024 - по н.в.)</p>
-                </div>
+                <h4>Practice 1 • Первый сервер на Go</h4>
+                <p>Пробное развертывание самописного HTTP сервера с двумя endpoint'ами</p>
+                <div class="project-tech">Go • HTTP Server • REST API</div>
             </div>
-            <a href="#" class="btn btn-primary">
-                <i class="fas fa-download"></i> Открыть полное резюме (PDF)
-            </a>
-        </div>
-    </section>
 
-    <!-- Contacts Section -->
-    <section id="contacts">
-        <h2>Давайте построим что-то вместе</h2>
-        <p class="section-subtitle">Всегда открыт к обсуждению возможностей, проектов или просто интересному разговору о бэкенде.</p>
-        <a href="https://t.me/Sun1tAr" class="btn btn-primary telegram-btn">
-            <i class="fab fa-telegram"></i> Написать в Telegram
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-2')">
+                <div class="project-icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+                <h4>Practice 2 • Архитектура приложений</h4>
+                <p>Изучение основ построения структуры приложений и работа с логгированием</p>
+                <div class="project-tech">Go • Application Structure • Logging</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-3')">
+                <div class="project-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h4>Practice 3 • REST API для задач</h4>
+                <p>Полнофункциональное REST API с CRUD операциями и валидацией</p>
+                <div class="project-tech">Go • REST API • CRUD • Middleware</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-4')">
+                <div class="project-icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h4>Practice 4 • Продвинутый REST API</h4>
+                <p>CRUD сервис с версионированием API, пагинацией и фильтрацией</p>
+                <div class="project-tech">Go • Chi Router • REST API • Pagination</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-5')">
+                <div class="project-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h4>Practice 5 • PostgreSQL и пул соединений</h4>
+                <p>Приложение для управления задачами с подключением к PostgreSQL</p>
+                <div class="project-tech">Go • PostgreSQL • Connection Pool • Transactions</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-7')">
+                <div class="project-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4>Practice 7 • Redis кэширование</h4>
+                <p>Реализация высокопроизводительного кэша на Redis с TTL</p>
+                <div class="project-tech">Go • Redis • Caching • TTL • Docker</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-8')">
+                <div class="project-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h4>Practice 8 • MongoDB</h4>
+                <p>REST API для заметок с использованием документной модели данных</p>
+                <div class="project-tech">Go • MongoDB • NoSQL • CRUD</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-9')">
+                <div class="project-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h4>Practice 9 • Аутентификация</h4>
+                <p>Система регистрации и входа с безопасным хранением паролей</p>
+                <div class="project-tech">Go • PostgreSQL • bcrypt • Authentication</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-10')">
+                <div class="project-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h4>Practice 10 • JWT аутентификация</h4>
+                <p>Система безопасности с access/refresh токенами и RBAC</p>
+                <div class="project-tech">Go • JWT • RBAC • Middleware • Security</div>
+            </div>
+
+            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-11')">
+                <div class="project-icon">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <h4>Practice 11 • REST API для заметок</h4>
+                <p>Полнофункциональный CRUD сервис с правильными HTTP методами</p>
+                <div class="project-tech">Go • REST API • CRUD • Chi Router</div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="projects-group">-->
+<!--        <h3 class="group-title">-->
+<!--            <i class="fab fa-golang"></i>-->
+<!--            Учебные проекты на Go-->
+<!--        </h3>-->
+<!--        <div class="projects-grid">-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-1')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fab fa-golang"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 1 • Первый сервер на Go</h4>-->
+<!--                <p>Пробное развертывание самописного HTTP сервера с двумя endpoint'ами. Изучение основ веб-разработки на Go.</p>-->
+
+<!--                <div class="project-tech">Go • HTTP Server • REST API • Web Development</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">HTTP сервер</span>-->
+<!--                    <span class="feature-tag">Endpoint /hello</span>-->
+<!--                    <span class="feature-tag">Endpoint /user</span>-->
+<!--                    <span class="feature-tag">Порт 8080</span>-->
+<!--                    <span class="feature-tag">Go модули</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-code-branch"></i>-->
+<!--                        <span>Структура: модульная архитектура</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-terminal"></i>-->
+<!--                        <span>Сборка: go build & go run</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-check-circle"></i>-->
+<!--                        <span>Тестирование: curl endpoints</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-2')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-sitemap"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 2 • Архитектура приложений на Go</h4>-->
+<!--                <p>Изучение основ построения структуры приложений, работа с логгированием и организацией кода в Go проектах.</p>-->
+
+<!--                <div class="project-tech">Go • Application Structure • Logging • Architecture</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">Структура приложения</span>-->
+<!--                    <span class="feature-tag">Логгирование</span>-->
+<!--                    <span class="feature-tag">Handler'ы</span>-->
+<!--                    <span class="feature-tag">Модульность</span>-->
+<!--                    <span class="feature-tag">Организация кода</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-layer-group"></i>-->
+<!--                        <span>Архитектура: модульная структура приложения</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-scroll"></i>-->
+<!--                        <span>Логирование: запись действий handler'ов</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-project-diagram"></i>-->
+<!--                        <span>Организация: cmd/, internal/ структура</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-3')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-tasks"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 3 • REST API для управления задачами</h4>-->
+<!--                <p>Полнофункциональное REST API с CRUD операциями, валидацией, CORS и переменными окружения.</p>-->
+
+<!--                <div class="project-tech">Go • REST API • CRUD • Middleware • CORS • Environment Variables</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">CRUD операции</span>-->
+<!--                    <span class="feature-tag">Валидация данных</span>-->
+<!--                    <span class="feature-tag">CORS Middleware</span>-->
+<!--                    <span class="feature-tag">Переменные окружения</span>-->
+<!--                    <span class="feature-tag">Makefile скрипты</span>-->
+<!--                    <span class="feature-tag">Postman коллекция</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-database"></i>-->
+<!--                        <span>Хранение: InMemory Repository</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-shield-alt"></i>-->
+<!--                        <span>Валидация: длина заголовка 3-140 символов</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-network-wired"></i>-->
+<!--                        <span>CORS: Access-Control-Allow-Origin: *</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-cogs"></i>-->
+<!--                        <span>Конфигурация: переменные окружения PORT</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>API Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/health</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/tasks?q=</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/tasks</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/tasks/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method patch">PATCH</span>-->
+<!--                            <span class="path">/tasks/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method delete">DELETE</span>-->
+<!--                            <span class="path">/tasks/{id}</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-4')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-route"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 4 • Продвинутый REST API с chi router</h4>-->
+<!--                <p>CRUD сервис для управления задачами с версионированием API, пагинацией, фильтрацией и сохранением на диск.</p>-->
+
+<!--                <div class="project-tech">Go • Chi Router • REST API • Pagination • Filtering • File Storage</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">Chi Router</span>-->
+<!--                    <span class="feature-tag">API Versioning</span>-->
+<!--                    <span class="feature-tag">Pagination</span>-->
+<!--                    <span class="feature-tag">Filtering</span>-->
+<!--                    <span class="feature-tag">File Storage</span>-->
+<!--                    <span class="feature-tag">Error Handling</span>-->
+<!--                    <span class="feature-tag">HTTP Status Codes</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-code-branch"></i>-->
+<!--                        <span>API Versioning: /api/v1/, /api/v2/</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-filter"></i>-->
+<!--                        <span>Фильтрация: по статусу done=true/false</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-copy"></i>-->
+<!--                        <span>Пагинация: page & limit параметры</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-save"></i>-->
+<!--                        <span>Хранение: JSON файл с автосохранением</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>API v1 Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/health</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/tasks?page=&limit=&done=</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/api/v1/tasks</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/tasks/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method put">PUT</span>-->
+<!--                            <span class="path">/api/v1/tasks/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method delete">DELETE</span>-->
+<!--                            <span class="path">/api/v1/tasks/{id}</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="status-codes">-->
+<!--                    <div class="status-group">-->
+<!--                        <h5>HTTP Status Codes:</h5>-->
+<!--                        <div class="status-item">-->
+<!--                            <span class="status success">200</span>-->
+<!--                            <span class="status-desc">OK - Успешный ответ</span>-->
+<!--                        </div>-->
+<!--                        <div class="status-item">-->
+<!--                            <span class="status created">201</span>-->
+<!--                            <span class="status-desc">Created - Задача создана</span>-->
+<!--                        </div>-->
+<!--                        <div class="status-item">-->
+<!--                            <span class="status no-content">204</span>-->
+<!--                            <span class="status-desc">No Content - Удаление успешно</span>-->
+<!--                        </div>-->
+<!--                        <div class="status-item">-->
+<!--                            <span class="status client-error">400</span>-->
+<!--                            <span class="status-desc">Bad Request - Некорректные данные</span>-->
+<!--                        </div>-->
+<!--                        <div class="status-item">-->
+<!--                            <span class="status client-error">404</span>-->
+<!--                            <span class="status-desc">Not Found - Задача не найдена</span>-->
+<!--                        </div>-->
+<!--                        <div class="status-item">-->
+<!--                            <span class="status client-error">422</span>-->
+<!--                            <span class="status-desc">Unprocessable Entity - Ошибка валидации</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-5')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-database"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 5 • Работа с PostgreSQL и пулом соединений</h4>-->
+<!--                <p>Приложение для управления задачами с подключением к PostgreSQL, настройкой пула соединений и транзакциями.</p>-->
+
+<!--                <div class="project-tech">Go • PostgreSQL • Connection Pool • Transactions • SQL • CRUD</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">PostgreSQL</span>-->
+<!--                    <span class="feature-tag">Пул соединений</span>-->
+<!--                    <span class="feature-tag">Транзакции</span>-->
+<!--                    <span class="feature-tag">SQL плейсхолдеры</span>-->
+<!--                    <span class="feature-tag">Массовая вставка</span>-->
+<!--                    <span class="feature-tag">Фильтрация</span>-->
+<!--                    <span class="feature-tag">Поиск по ID</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-server"></i>-->
+<!--                        <span>База данных: PostgreSQL в Ubuntu 22.04</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-plug"></i>-->
+<!--                        <span>Пул соединений: MaxOpenConns(5), MaxIdleConns(2)</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-exchange-alt"></i>-->
+<!--                        <span>Транзакции: атомарная массовая вставка</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-shield-alt"></i>-->
+<!--                        <span>Безопасность: плейсхолдеры $1, $2</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="database-schema">-->
+<!--                    <div class="schema-group">-->
+<!--                        <h5>Схема БД:</h5>-->
+<!--                        <div class="schema-item">-->
+<!--                            <span class="table-name">tasks</span>-->
+<!--                            <div class="table-columns">-->
+<!--                                <div class="column">-->
+<!--                                    <span class="column-name">id</span>-->
+<!--                                    <span class="column-type">SERIAL PRIMARY KEY</span>-->
+<!--                                </div>-->
+<!--                                <div class="column">-->
+<!--                                    <span class="column-name">title</span>-->
+<!--                                    <span class="column-type">TEXT NOT NULL</span>-->
+<!--                                </div>-->
+<!--                                <div class="column">-->
+<!--                                    <span class="column-name">done</span>-->
+<!--                                    <span class="column-type">BOOLEAN DEFAULT FALSE</span>-->
+<!--                                </div>-->
+<!--                                <div class="column">-->
+<!--                                    <span class="column-name">created_at</span>-->
+<!--                                    <span class="column-type">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="repository-methods">-->
+<!--                    <div class="methods-group">-->
+<!--                        <h5>Методы репозитория:</h5>-->
+<!--                        <div class="method-item">-->
+<!--                            <span class="method-icon">+</span>-->
+<!--                            <span class="method-name">CreateTask</span>-->
+<!--                            <span class="method-desc">Вставка одной задачи</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-item">-->
+<!--                            <span class="method-icon">📋</span>-->
+<!--                            <span class="method-name">ListTasks</span>-->
+<!--                            <span class="method-desc">Получение всех задач</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-item">-->
+<!--                            <span class="method-icon">✅</span>-->
+<!--                            <span class="method-name">ListDone</span>-->
+<!--                            <span class="method-desc">Фильтрация по статусу</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-item">-->
+<!--                            <span class="method-icon">🔍</span>-->
+<!--                            <span class="method-name">FindByID</span>-->
+<!--                            <span class="method-desc">Поиск задачи по ID</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-item">-->
+<!--                            <span class="method-icon">⚡</span>-->
+<!--                            <span class="method-name">CreateMany</span>-->
+<!--                            <span class="method-desc">Массовая вставка (транзакция)</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-7')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-bolt"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 7 • Redis кэширование и работа с TTL</h4>-->
+<!--                <p>Реализация высокопроизводительного кэша на Redis с автоматическим удалением данных по времени жизни.</p>-->
+
+<!--                <div class="project-tech">Go • Redis • Caching • TTL • Docker • In-Memory DB</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">Redis 7.4</span>-->
+<!--                    <span class="feature-tag">SET/GET операции</span>-->
+<!--                    <span class="feature-tag">TTL (Time-To-Live)</span>-->
+<!--                    <span class="feature-tag">Docker контейнер</span>-->
+<!--                    <span class="feature-tag">In-Memory кэш</span>-->
+<!--                    <span class="feature-tag">Postman тестирование</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-docker"></i>-->
+<!--                        <span>Развертывание: Redis в Docker контейнере</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-clock"></i>-->
+<!--                        <span>TTL: автоматическое удаление через 10 секунд</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-network-wired"></i>-->
+<!--                        <span>Архитектура: модульная с internal/cache пакетом</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-shield-alt"></i>-->
+<!--                        <span>Безопасность: переменные окружения REDIS_IP, REDIS_PASS</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>API Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/set?key=test&value=hello</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/get?key=test</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/ttl?key=test</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="redis-features">-->
+<!--                    <div class="features-group">-->
+<!--                        <h5>Redis преимущества:</h5>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">⚡</span>-->
+<!--                            <span class="feature-desc">In-Memory хранение - максимальная скорость</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🔄</span>-->
+<!--                            <span class="feature-desc">Автоочистка данных по TTL</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">📊</span>-->
+<!--                            <span class="feature-desc">Разнообразные типы данных</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🛡️</span>-->
+<!--                            <span class="feature-desc">Снижение нагрузки на основную БД</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="use-cases">-->
+<!--                    <div class="cases-group">-->
+<!--                        <h5>Примеры использования TTL:</h5>-->
+<!--                        <div class="case-item">-->
+<!--                            <i class="fas fa-user-clock"></i>-->
+<!--                            <span>Сессии пользователей</span>-->
+<!--                        </div>-->
+<!--                        <div class="case-item">-->
+<!--                            <i class="fas fa-shopping-cart"></i>-->
+<!--                            <span>Кэш популярных товаров</span>-->
+<!--                        </div>-->
+<!--                        <div class="case-item">-->
+<!--                            <i class="fas fa-sms"></i>-->
+<!--                            <span>Временные коды подтверждения</span>-->
+<!--                        </div>-->
+<!--                        <div class="case-item">-->
+<!--                            <i class="fas fa-chart-bar"></i>-->
+<!--                            <span>Результаты частых запросов</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-8')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-leaf"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 8 • MongoDB и документная модель данных</h4>-->
+<!--                <p>Полнофункциональный REST API для заметок с использованием MongoDB, CRUD операциями и пагинацией.</p>-->
+
+<!--                <div class="project-tech">Go • MongoDB • NoSQL • CRUD • Docker • BSON</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">MongoDB 7.0</span>-->
+<!--                    <span class="feature-tag">Документная модель</span>-->
+<!--                    <span class="feature-tag">CRUD операции</span>-->
+<!--                    <span class="feature-tag">ObjectID</span>-->
+<!--                    <span class="feature-tag">Паганация</span>-->
+<!--                    <span class="feature-tag">Поиск</span>-->
+<!--                    <span class="feature-tag">Уникальные индексы</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-database"></i>-->
+<!--                        <span>База данных: MongoDB в Docker контейнере</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-code"></i>-->
+<!--                        <span>Драйвер: официальный mongo-driver v1.17.6</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-layer-group"></i>-->
+<!--                        <span>Архитектура: модульная с internal/db и internal/notes</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-clock"></i>-->
+<!--                        <span>Безопасность: context.WithTimeout для всех запросов</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>API Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/api/v1/notes</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/notes?page=&limit=&search=</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method patch">PATCH</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method delete">DELETE</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/health</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="data-model">-->
+<!--                    <div class="model-group">-->
+<!--                        <h5>Модель данных Note:</h5>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">ID</span>-->
+<!--                            <span class="field-type">primitive.ObjectID</span>-->
+<!--                            <span class="field-desc">Автоматически генерируемый идентификатор</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">Title</span>-->
+<!--                            <span class="field-type">string</span>-->
+<!--                            <span class="field-desc">Заголовок заметки с уникальным индексом</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">Content</span>-->
+<!--                            <span class="field-type">string</span>-->
+<!--                            <span class="field-desc">Содержимое заметки</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">CreatedAt</span>-->
+<!--                            <span class="field-type">time.Time</span>-->
+<!--                            <span class="field-desc">Время создания</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">UpdatedAt</span>-->
+<!--                            <span class="field-type">time.Time</span>-->
+<!--                            <span class="field-desc">Время последнего обновления</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="mongo-features">-->
+<!--                    <div class="features-group">-->
+<!--                        <h5>Преимущества MongoDB:</h5>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🎯</span>-->
+<!--                            <span class="feature-desc">Гибкая схема данных без миграций</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">⚡</span>-->
+<!--                            <span class="feature-desc">Высокая производительность операций вставки</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">📊</span>-->
+<!--                            <span class="feature-desc">Удобство работы с вложенными структурами</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🚀</span>-->
+<!--                            <span class="feature-desc">Горизонтальное масштабирование через шардирование</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-9')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-user-shield"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 9 • Безопасная аутентификация с bcrypt</h4>-->
+<!--                <p>Реализация системы регистрации и входа с безопасным хранением паролей в PostgreSQL.</p>-->
+
+<!--                <div class="project-tech">Go • PostgreSQL • bcrypt • GORM • Authentication • Security</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">Регистрация</span>-->
+<!--                    <span class="feature-tag">Аутентификация</span>-->
+<!--                    <span class="feature-tag">bcrypt</span>-->
+<!--                    <span class="feature-tag">Хеширование</span>-->
+<!--                    <span class="feature-tag">Соль</span>-->
+<!--                    <span class="feature-tag">GORM</span>-->
+<!--                    <span class="feature-tag">Безопасность</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-database"></i>-->
+<!--                        <span>Хранение: PostgreSQL с GORM миграциями</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-lock"></i>-->
+<!--                        <span>Безопасность: bcrypt с cost=13</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-shield-alt"></i>-->
+<!--                        <span>Защита: обобщенные сообщения об ошибках</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-layer-group"></i>-->
+<!--                        <span>Архитектура: модульная с internal/core, http, repo</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>API Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/auth/register</span>-->
+<!--                            <span class="status success">201</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/auth/login</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="security-features">-->
+<!--                    <div class="features-group">-->
+<!--                        <h5>Меры безопасности:</h5>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🔒</span>-->
+<!--                            <span class="feature-desc">Хеширование паролей с автоматической солью</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🛡️</span>-->
+<!--                            <span class="feature-desc">Обобщенные ошибки "invalid_credentials"</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">⚡</span>-->
+<!--                            <span class="feature-desc">Намеренно медленный алгоритм для защиты от brute-force</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🎯</span>-->
+<!--                            <span class="feature-desc">Уникальные индексы email для предотвращения дубликатов</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="user-model">-->
+<!--                    <div class="model-group">-->
+<!--                        <h5>Модель User:</h5>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">ID</span>-->
+<!--                            <span class="field-type">int64</span>-->
+<!--                            <span class="field-desc">Первичный ключ</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">Email</span>-->
+<!--                            <span class="field-type">string</span>-->
+<!--                            <span class="field-desc">Уникальный, not null</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">PasswordHash</span>-->
+<!--                            <span class="field-type">string</span>-->
+<!--                            <span class="field-desc">json:"-" (скрыт в ответах)</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">Timestamps</span>-->
+<!--                            <span class="field-type">time.Time</span>-->
+<!--                            <span class="field-desc">CreatedAt, UpdatedAt</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="response-codes">-->
+<!--                    <div class="codes-group">-->
+<!--                        <h5>HTTP статусы:</h5>-->
+<!--                        <div class="code-item">-->
+<!--                            <span class="status created">201</span>-->
+<!--                            <span class="code-desc">Created - успешная регистрация</span>-->
+<!--                        </div>-->
+<!--                        <div class="code-item">-->
+<!--                            <span class="status success">200</span>-->
+<!--                            <span class="code-desc">OK - успешный вход</span>-->
+<!--                        </div>-->
+<!--                        <div class="code-item">-->
+<!--                            <span class="status client-error">409</span>-->
+<!--                            <span class="code-desc">Conflict - email уже занят</span>-->
+<!--                        </div>-->
+<!--                        <div class="code-item">-->
+<!--                            <span class="status client-error">401</span>-->
+<!--                            <span class="code-desc">Unauthorized - неверные учетные данные</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-10')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-key"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 10 • JWT аутентификация и авторизация</h4>-->
+<!--                <p>Полноценная система безопасности с access/refresh токенами, RBAC/ABAC и middleware.</p>-->
+
+<!--                <div class="project-tech">Go • JWT • RBAC • ABAC • Middleware • Security • Refresh Tokens</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">JWT HS256</span>-->
+<!--                    <span class="feature-tag">Access/Refresh токены</span>-->
+<!--                    <span class="feature-tag">RBAC роли</span>-->
+<!--                    <span class="feature-tag">ABAC правила</span>-->
+<!--                    <span class="feature-tag">Middleware AuthN/AuthZ</span>-->
+<!--                    <span class="feature-tag">Token Blacklist</span>-->
+<!--                    <span class="feature-tag">Stateless аутентификация</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-clock"></i>-->
+<!--                        <span>TTL: Access 15 минут, Refresh 7 дней</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-user-tag"></i>-->
+<!--                        <span>Роли: admin (полный доступ), user (ограниченный)</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-shield-alt"></i>-->
+<!--                        <span>Безопасность: Blacklist отозванных токенов</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-sitemap"></i>-->
+<!--                        <span>Архитектура: Chi router + middleware цепочка</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>API Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/api/v1/login</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/api/v1/refresh</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/api/v1/logout</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/me</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/users/{id}</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/admin/stats</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="security-features">-->
+<!--                    <div class="features-group">-->
+<!--                        <h5>Система безопасности:</h5>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🔐</span>-->
+<!--                            <span class="feature-desc">Access токены: 15 минут (минимальный риск)</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🔄</span>-->
+<!--                            <span class="feature-desc">Refresh токены: 7 дней + blacklist при logout</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">👥</span>-->
+<!--                            <span class="feature-desc">RBAC: admin (полный доступ), user (ограниченный)</span>-->
+<!--                        </div>-->
+<!--                        <div class="feature-item">-->
+<!--                            <span class="feature-icon">🎯</span>-->
+<!--                            <span class="feature-desc">ABAC: пользователи видят только свои данные</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="token-structure">-->
+<!--                    <div class="structure-group">-->
+<!--                        <h5>JWT Claims структура:</h5>-->
+<!--                        <div class="claim-item">-->
+<!--                            <span class="claim-name">sub</span>-->
+<!--                            <span class="claim-type">userID</span>-->
+<!--                            <span class="claim-desc">Идентификатор пользователя</span>-->
+<!--                        </div>-->
+<!--                        <div class="claim-item">-->
+<!--                            <span class="claim-name">email</span>-->
+<!--                            <span class="claim-type">string</span>-->
+<!--                            <span class="claim-desc">Email пользователя</span>-->
+<!--                        </div>-->
+<!--                        <div class="claim-item">-->
+<!--                            <span class="claim-name">role</span>-->
+<!--                            <span class="claim-type">string</span>-->
+<!--                            <span class="claim-desc">Роль: "admin" или "user"</span>-->
+<!--                        </div>-->
+<!--                        <div class="claim-item">-->
+<!--                            <span class="claim-name">exp</span>-->
+<!--                            <span class="claim-type">timestamp</span>-->
+<!--                            <span class="claim-desc">Время истечения токена</span>-->
+<!--                        </div>-->
+<!--                        <div class="claim-item">-->
+<!--                            <span class="claim-name">iat</span>-->
+<!--                            <span class="claim-type">timestamp</span>-->
+<!--                            <span class="claim-desc">Время создания токена</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="access-control">-->
+<!--                    <div class="control-group">-->
+<!--                        <h5>Правила доступа:</h5>-->
+<!--                        <div class="rule-item">-->
+<!--                            <i class="fas fa-user-shield"></i>-->
+<!--                            <span><strong>Admin:</strong> Полный доступ ко всем данным</span>-->
+<!--                        </div>-->
+<!--                        <div class="rule-item">-->
+<!--                            <i class="fas fa-user"></i>-->
+<!--                            <span><strong>User:</strong> Только свои данные + общая статистика</span>-->
+<!--                        </div>-->
+<!--                        <div class="rule-item">-->
+<!--                            <i class="fas fa-exchange-alt"></i>-->
+<!--                            <span><strong>Refresh:</strong> Обновление access токена без повторного логина</span>-->
+<!--                        </div>-->
+<!--                        <div class="rule-item">-->
+<!--                            <i class="fas fa-ban"></i>-->
+<!--                            <span><strong>Logout:</strong> Немедленный отзыв refresh токена через blacklist</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="project-card" onclick="openProject('MIREA-TIP-Practice-11')">-->
+<!--                <div class="project-icon">-->
+<!--                    <i class="fas fa-sticky-note"></i>-->
+<!--                </div>-->
+<!--                <h4>Practice 11 • REST API для управления заметками</h4>-->
+<!--                <p>Полнофункциональный CRUD сервис с правильными HTTP методами, статус-кодами и слоистой архитектурой.</p>-->
+
+<!--                <div class="project-tech">Go • REST API • CRUD • Chi Router • JSON • HTTP Methods</div>-->
+
+<!--                <div class="project-features">-->
+<!--                    <span class="feature-tag">RESTful API</span>-->
+<!--                    <span class="feature-tag">CRUD операции</span>-->
+<!--                    <span class="feature-tag">Слоистая архитектура</span>-->
+<!--                    <span class="feature-tag">HTTP статус-коды</span>-->
+<!--                    <span class="feature-tag">In-memory хранилище</span>-->
+<!--                    <span class="feature-tag">Mutex синхронизация</span>-->
+<!--                    <span class="feature-tag">OpenAPI документация</span>-->
+<!--                </div>-->
+
+<!--                <div class="project-details">-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-layer-group"></i>-->
+<!--                        <span>Архитектура: Handler → Service → Repository</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-shield-alt"></i>-->
+<!--                        <span>Синхронизация: sync.Mutex для thread-safety</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-code"></i>-->
+<!--                        <span>Маршрутизация: Chi router с RESTful endpoints</span>-->
+<!--                    </div>-->
+<!--                    <div class="detail-item">-->
+<!--                        <i class="fas fa-book"></i>-->
+<!--                        <span>Документация: OpenAPI спецификация</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="api-endpoints">-->
+<!--                    <div class="endpoint-group">-->
+<!--                        <h5>REST Endpoints:</h5>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method post">POST</span>-->
+<!--                            <span class="path">/api/v1/notes</span>-->
+<!--                            <span class="status created">201</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/notes</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method get">GET</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                            <span class="status success">200</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method put">PUT</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                            <span class="status no-content">204</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method patch">PATCH</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                            <span class="status no-content">204</span>-->
+<!--                        </div>-->
+<!--                        <div class="endpoint-item">-->
+<!--                            <span class="method delete">DELETE</span>-->
+<!--                            <span class="path">/api/v1/notes/{id}</span>-->
+<!--                            <span class="status no-content">204</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="data-model">-->
+<!--                    <div class="model-group">-->
+<!--                        <h5>Модель Note:</h5>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">ID</span>-->
+<!--                            <span class="field-type">int64</span>-->
+<!--                            <span class="field-desc">Автоинкрементный идентификатор</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">Title</span>-->
+<!--                            <span class="field-type">string</span>-->
+<!--                            <span class="field-desc">Заголовок заметки</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">Content</span>-->
+<!--                            <span class="field-type">string</span>-->
+<!--                            <span class="field-desc">Содержимое заметки</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">CreatedAt</span>-->
+<!--                            <span class="field-type">time.Time</span>-->
+<!--                            <span class="field-desc">Время создания</span>-->
+<!--                        </div>-->
+<!--                        <div class="model-item">-->
+<!--                            <span class="field-name">UpdatedAt</span>-->
+<!--                            <span class="field-type">*time.Time</span>-->
+<!--                            <span class="field-desc">Время последнего обновления</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="architecture-layers">-->
+<!--                    <div class="layers-group">-->
+<!--                        <h5>Слоистая архитектура:</h5>-->
+<!--                        <div class="layer-item">-->
+<!--                            <div class="layer-name">Handler</div>-->
+<!--                            <div class="layer-desc">HTTP обработчики, парсинг JSON, статус-коды</div>-->
+<!--                        </div>-->
+<!--                        <div class="layer-item">-->
+<!--                            <div class="layer-name">Service</div>-->
+<!--                            <div class="layer-desc">Бизнес-логика (в проекте минимальна)</div>-->
+<!--                        </div>-->
+<!--                        <div class="layer-item">-->
+<!--                            <div class="layer-name">Repository</div>-->
+<!--                            <div class="layer-desc">In-memory хранилище с mutex защитой</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="http-methods">-->
+<!--                    <div class="methods-group">-->
+<!--                        <h5>HTTP методы и CRUD:</h5>-->
+<!--                        <div class="method-pair">-->
+<!--                            <span class="crud-operation">Create</span>-->
+<!--                            <span class="http-method">POST</span>-->
+<!--                            <span class="status-code">201 Created</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-pair">-->
+<!--                            <span class="crud-operation">Read (list)</span>-->
+<!--                            <span class="http-method">GET</span>-->
+<!--                            <span class="status-code">200 OK</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-pair">-->
+<!--                            <span class="crud-operation">Read (single)</span>-->
+<!--                            <span class="http-method">GET</span>-->
+<!--                            <span class="status-code">200 OK</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-pair">-->
+<!--                            <span class="crud-operation">Update (full)</span>-->
+<!--                            <span class="http-method">PUT</span>-->
+<!--                            <span class="status-code">204 No Content</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-pair">-->
+<!--                            <span class="crud-operation">Update (partial)</span>-->
+<!--                            <span class="http-method">PATCH</span>-->
+<!--                            <span class="status-code">204 No Content</span>-->
+<!--                        </div>-->
+<!--                        <div class="method-pair">-->
+<!--                            <span class="crud-operation">Delete</span>-->
+<!--                            <span class="http-method">DELETE</span>-->
+<!--                            <span class="status-code">204 No Content</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+</section>
+
+<!-- Resume Section -->
+<section id="resume">
+    <h2>Опыт и компетенции</h2>
+    <div class="resume-preview">
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Основной стек</h3>
+                <p>Java, Spring Boot, Hibernate, PostgreSQL, Docker, Maven</p>
+            </div>
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Образование</h3>
+                <p>МИРЭА (Магистратура, Промышленное программирование) 2023-2027</p>
+            </div>
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Опыт работы</h3>
+                <p>ЕНТЦ "НЭК ТЕК" - Мл. инженер отдела алгоритмов (Сен 2024 - по н.в.)</p>
+            </div>
+        </div>
+        <a href="#" class="btn btn-primary">
+            <i class="fas fa-download"></i> Открыть полное резюме (PDF)
         </a>
-        <div class="contact-links">
-            <a href="mailto:denchik2376@yandex.ru" class="contact-link">
-                <i class="fas fa-envelope"></i> denchik2376@yandex.ru
-            </a>
-            <a href="https://github.com/Sun1tAr" class="contact-link" target="_blank">
-                <i class="fab fa-github"></i> github.com/Sun1tAr
-            </a>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        // Функция для открытия проекта на GitHub
-        function openProject(repoName) {
-            const githubUrl = `https://github.com/Sun1tAr/${repoName}`;
-            window.open(githubUrl, '_blank');
-        }
+<!-- Contacts Section -->
+<section id="contacts">
+    <h2>Давайте построим что-то вместе</h2>
+    <p class="section-subtitle">Всегда открыт к обсуждению возможностей, проектов или просто интересному разговору о бэкенде.</p>
+    <a href="https://t.me/Sun1tAr" class="btn btn-primary telegram-btn">
+        <i class="fab fa-telegram"></i> Написать в Telegram
+    </a>
+    <div class="contact-links">
+        <a href="mailto:denchik2376@yandex.ru" class="contact-link">
+            <i class="fas fa-envelope"></i> denchik2376@yandex.ru
+        </a>
+        <a href="https://github.com/Sun1tAr" class="contact-link" target="_blank">
+            <i class="fab fa-github"></i> github.com/Sun1tAr
+        </a>
+    </div>
+</section>
 
-        // Плавная прокрутка для навигации
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Изменение навигации при скролле
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('nav-active');
-            } else {
-                nav.classList.remove('nav-active');
-            }
-        });
-
-        // Анимация появления элементов при скролле
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Анимация появления карточек проектов
-        function initProjectAnimations() {
-            const projectCards = document.querySelectorAll('.project-card');
-            
-            const projectObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // Задержка для последовательного появления
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 100);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            projectCards.forEach(card => {
-                projectObserver.observe(card);
-            });
-        }
-
-        // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            initProjectAnimations();
-            
-            // Наблюдаем за всеми элементами с классом fade-in
-            const elementsToAnimate = document.querySelectorAll('.skill-category, .resume-preview, .about-content');
-            elementsToAnimate.forEach(element => {
-                element.classList.add('fade-in');
-                observer.observe(element);
-            });
-            
-            // Обработка мобильного меню
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-                });
-            }
-            
-            // Закрытие мобильного меню при клике на ссылку
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        navLinks.style.display = 'none';
-                    }
-                });
-            });
-
-            // Добавляем обработчики клавиатуры для доступности проектов
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        const repoName = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-                        openProject(repoName);
-                    }
-                });
-                
-                // Делаем карточки доступными для таб-навигации
-                card.setAttribute('tabindex', '0');
-                card.setAttribute('role', 'button');
-                card.setAttribute('aria-label', `Открыть проект ${card.querySelector('h4').textContent} на GitHub`);
-            });
-        });
-
-        // Параллакс эффект для hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.getElementById('hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Добавляем класс для анимации загрузки
-        window.addEventListener('load', function() {
-            document.body.classList.add('loaded');
-        });
-    </script>
+<script src="scripts/script.js"></script>
 </body>
 </html>
