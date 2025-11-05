@@ -1257,3 +1257,33 @@ h2::after {
     font-size: 0.7rem;
     font-family: monospace;
 }
+
+.fa-server {
+    color: #5382A1; /* Java blue color */
+}
+
+.project-tech {
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    /*gap: 0.4rem;*/
+    /*margin-top: 0.8rem;*/
+}
+
+.tech-divider {
+    height: 1px;
+    background: rgba(255, 107, 53, 0.2);
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.tech-tag {
+    display: inline-block;
+    background: rgba(255, 107, 53, 0.15);
+    color: var(--neon-orange);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    margin: 0.2rem 0.2rem 0 0;
+    white-space: nowrap;
+}
