@@ -492,6 +492,65 @@ h2::after {
     border: 1px solid rgba(255, 107, 53, 0.3);
 }
 
+/* Стили для индикатора README в карточках проектов */
+.readme-indicator {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.95), rgba(255, 142, 83, 0.95));
+    color: var(--dark-bg);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(20px) rotate(5deg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.readme-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .readme-indicator {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+}
+
+.project-card:hover .readme-indicator::before {
+    opacity: 1;
+}
+
+/* Добавляем иконку документа к индикатору */
+.readme-indicator i {
+    margin-right: 4px;
+    font-size: 0.7rem;
+}
+
+/* Эффект пульсации при появлении */
+@keyframes gentle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.project-card:hover .readme-indicator {
+    animation: gentle-pulse 2s ease-in-out infinite;
+}
+
 /* Resume Section */
 .resume-preview {
     background: linear-gradient(135deg, rgba(45, 27, 105, 0.3), rgba(15, 11, 35, 0.6));
@@ -648,6 +707,11 @@ h2::after {
 
     .group-title {
         font-size: 1.5rem;
+    }
+
+    .readme-indicator {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
     }
 }
 
