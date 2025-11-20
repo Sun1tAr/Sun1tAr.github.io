@@ -2,7 +2,7 @@
   "name": "sun1tar-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sun1tar.github.io",
+  "homepage": "https://sun1tar.github.io/build",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
     "react": "^18.2.0",
