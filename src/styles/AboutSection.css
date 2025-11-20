@@ -1,47 +1,99 @@
 #about {
-  padding-top: 8rem;
-  margin-top: 60px;
+    margin-top: 60px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--light-text);
+    text-align: center;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
+    border-radius: 2px;
 }
 
 .about-content {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
 }
 
-.about-text {
-  display: flex;
-  flex-direction: column;
+.photo-frame {
+    width: 100%;
+    height: 470px;
+    background: linear-gradient(45deg, var(--deep-purple), var(--neon-orange));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--light-text);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, var(--neon-orange), var(--deep-purple), var(--neon-orange));
+    border-radius: 15px;
+    z-index: -1;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .about-text p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
 }
 
 .goal-box {
-  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(45, 27, 105, 0.3));
-  border-left: 4px solid #FF6B35;
-  padding: 2rem;
-  margin-top: 2rem;
-  border-radius: 0 10px 10px 0;
-  position: relative;
-  overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(45, 27, 105, 0.3));
+    border-left: 4px solid var(--neon-orange);
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 0 10px 10px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.goal-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-orange), transparent);
 }
 
 @media (max-width: 768px) {
-  #about {
-    padding-top: 4rem;
-  }
-
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .about-text p {
-    font-size: 1rem;
-  }
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .about-text p {
+        font-size: 1rem;
+    }
 }

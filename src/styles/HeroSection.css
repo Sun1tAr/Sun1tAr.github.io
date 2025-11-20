@@ -1,58 +1,123 @@
+/* Из твоего style.css */
 #hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  background: linear-gradient(135deg, #2D1B69 0%, #0F0B23 100%);
-  position: relative;
-  overflow: hidden;
-  margin-top: 60px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--deep-purple) 0%, var(--dark-bg) 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 600px;
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 107, 53, 0.1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circuit-animation {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.circuit-line {
+    position: absolute;
+    background: var(--neon-orange);
+    opacity: 0.3;
+}
+
+.circuit-line:nth-child(1) {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100px;
+    transform: translateX(-50%);
+}
+
+.circuit-line:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 100px;
+    transform: translateX(-50%);
+}
+
+.circuit-node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: var(--neon-orange);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
 
 h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #FFFFFF, #FF6B35);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: slideInFromLeft 1s ease-out;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--light-text), var(--neon-orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: slideInFromLeft 1s ease-out;
 }
 
 .subtitle {
-  font-size: 1.5rem;
-  color: #B0B0B0;
-  margin-bottom: 2rem;
-  animation: slideInFromLeft 1s ease-out 0.2s both;
+    font-size: 1.5rem;
+    color: var(--gray-text);
+    margin-bottom: 2rem;
+    animation: slideInFromLeft 1s ease-out 0.2s both;
 }
 
 @keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @media (max-width: 768px) {
-  #hero {
-    min-height: 80vh;
-    margin-top: 60px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-  }
+    #hero {
+        min-height: 80vh;
+        margin-top: 60px;
+    }
+    h1 {
+        font-size: 2.5rem;
+    }
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    .hero-bg {
+        display: none;
+    }
 }
