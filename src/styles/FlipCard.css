@@ -1,0 +1,139 @@
+.photo-placeholder {
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-3d {
+  position: relative;
+  width: 100%;
+  height: 470px;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-style: preserve-3d;
+}
+
+.flip-card-3d.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-front {
+  background: linear-gradient(45deg, #2D1B69, #FF6B35);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.flip-front-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.flip-front-label {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(15, 11, 35, 0.85);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #FF6B35;
+  font-weight: 600;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  z-index: 10;
+}
+
+.flip-back {
+  background: linear-gradient(45deg, #2D1B69, #FF6B35);
+  border-radius: 15px;
+  transform: rotateY(180deg);
+  padding: 2rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.flip-back::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 11, 35, 0.85);
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.flip-back-content {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.flip-back-title {
+  font-size: 1.5rem;
+  color: #FF6B35;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.flip-back-text {
+  font-size: 0.95rem;
+  color: #B0B0B0;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.flip-back-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.flip-back-item {
+  background: rgba(255, 107, 53, 0.1);
+  padding: 0.8rem;
+  border-left: 3px solid #FF6B35;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+}
+
+.flip-back-item strong {
+  color: #FF6B35;
+}
+
+@media (max-width: 768px) {
+  .flip-card-3d {
+    height: 350px;
+  }
+
+  .flip-back-title {
+    font-size: 1.2rem;
+  }
+
+  .flip-back-text {
+    font-size: 0.85rem;
+  }
+}

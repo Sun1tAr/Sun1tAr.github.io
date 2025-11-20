@@ -1,0 +1,32 @@
+#contacts {
+  background: linear-gradient(135deg, #2D1B69 0%, #090616 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.contacts-subtitle {
+  color: #B0B0B0;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contacts-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  #contacts {
+    padding: 3rem 1rem;
+  }
+
+  .contacts-subtitle {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,58 @@
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #2D1B69 0%, #0F0B23 100%);
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #FFFFFF, #FF6B35);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: slideInFromLeft 1s ease-out;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #B0B0B0;
+  margin-bottom: 2rem;
+  animation: slideInFromLeft 1s ease-out 0.2s both;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  #hero {
+    min-height: 80vh;
+    margin-top: 60px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+}

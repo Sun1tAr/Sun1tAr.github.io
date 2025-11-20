@@ -1,0 +1,47 @@
+#about {
+  padding-top: 8rem;
+  margin-top: 60px;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.goal-box {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(45, 27, 105, 0.3));
+  border-left: 4px solid #FF6B35;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  #about {
+    padding-top: 4rem;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+}
