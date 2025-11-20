@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/HeroSection.css';
+import '../styles/AboutSection.css';
 
 function HeroSection() {
     return (
@@ -7,13 +7,13 @@ function HeroSection() {
             <div className="hero-content">
                 <h1>Денис Туев</h1>
                 <p className="subtitle">Архитектор серверной логики</p>
-                <p className="section-subtitle">Превращаю сложные задачи в элегантные решения на Java. Где техника встречается с творчеством.</p>
-                <a href="#projects" className="btn btn-primary">Смотреть проекты</a>
-                <a href="#contacts" className="btn btn-secondary telegram-btn">
-                    <i className="fab fa-telegram"></i> Написать в Telegram
-                </a>
+                <p className="subtitle">Превращаю сложные задачи в элегантные решения на Java. Где техника встречается с
+                    творчеством.</p>
+                <div className="cta-buttons">
+                    <a href="#projects" className="btn btn-primary">Смотреть проекты</a>
+                    <a href="#contacts" className="btn btn-secondary">Написать в Telegram</a>
+                </div>
             </div>
-
             <div className="hero-bg">
                 <div className="circuit-animation">
                     <div className="circuit-line"></div>

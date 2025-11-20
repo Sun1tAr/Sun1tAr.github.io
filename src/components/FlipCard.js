@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/FlipCard.css';
+import '../styles/AboutSection.css';
 
 function FlipCard() {
   const [isFlipped, setIsFlipped] = useState(false);

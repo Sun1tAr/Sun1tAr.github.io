@@ -1,3 +1,395 @@
+/* Базовые стили и CSS переменные для цветов */
+:root {
+    --deep-purple: #2D1B69;
+    --dark-bg: #0F0B23;
+    --darker-bg: #090616;
+    --neon-orange: #FF6B35;
+    --neon-orange-light: #FF8E53;
+    --light-text: #FFFFFF;
+    --gray-text: #B0B0B0;
+    --gray-dark: #2A2A2A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Стили навигации */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(15, 11, 35, 0.95);
+    padding: 1.5rem 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 60px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.logo-path {
+    transition: all 0.5s ease;
+    filter: none;
+}
+
+.logo:hover .logo-path {
+    stroke-width: 4.5;
+    filter: url(#glow);
+    animation: pulse-logo 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-logo {
+    0%, 100% {
+        opacity: 0.9;
+        stroke-width: 3.5;
+    }
+    50% {
+        opacity: 1;
+        stroke-width: 4;
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--neon-orange);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--neon-orange);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.mobile-menu-btn {
+    display: none;
+    color: var(--light-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Стили секций */
+section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--deep-purple) 0%, var(--dark-bg) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 107, 53, 0.1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circuit-animation {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.circuit-line {
+    position: absolute;
+    background: var(--neon-orange);
+    opacity: 0.3;
+}
+
+.circuit-line:nth-child(1) {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100px;
+    transform: translateX(-50%);
+}
+
+.circuit-line:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 100px;
+    transform: translateX(-50%);
+}
+
+.circuit-node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: var(--neon-orange);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--light-text), var(--neon-orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: slideInFromLeft 1s ease-out;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--gray-text);
+    margin-bottom: 2rem;
+    animation: slideInFromLeft 1s ease-out 0.2s both;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--gray-text);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
+    color: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+    border: 2px solid var(--neon-orange);
+    color: var(--neon-orange);
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    background: var(--neon-orange);
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.telegram-btn {
+    background: linear-gradient(45deg, #0088cc, #00a2e8);
+}
+
+.telegram-btn:hover {
+    box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4);
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.photo-placeholder {
+    position: relative;
+}
+
+.photo-frame {
+    width: 100%;
+    height: 470px;
+    background: linear-gradient(45deg, var(--deep-purple), var(--neon-orange));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--light-text);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, var(--neon-orange), var(--deep-purple), var(--neon-orange));
+    border-radius: 15px;
+    z-index: -1;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.goal-box {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(45, 27, 105, 0.3));
+    border-left: 4px solid var(--neon-orange);
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 0 10px 10px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.goal-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-orange), transparent);
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--light-text);
+    text-align: center;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
+    border-radius: 2px;
+}
+
+/* Projects Section */
 #projects {
     background: var(--darker-bg);
 }
@@ -34,6 +426,9 @@
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
 }
 
 .project-card::before {
@@ -55,6 +450,11 @@
     transform: translateY(-5px);
     border-color: var(--neon-orange);
     box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+}
+
+.project-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .project-icon {
@@ -90,10 +490,9 @@
     font-size: 0.8rem;
     font-weight: 500;
     border: 1px solid rgba(255, 107, 53, 0.3);
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
 }
 
+/* Стили для индикатора README в карточках проектов */
 .readme-indicator {
     position: absolute;
     top: 15px;
@@ -107,6 +506,24 @@
     opacity: 0;
     transform: translateX(20px) rotate(5deg);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.readme-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .project-card:hover .readme-indicator {
@@ -114,11 +531,226 @@
     transform: translateX(0) rotate(0deg);
 }
 
+.project-card:hover .readme-indicator::before {
+    opacity: 1;
+}
+
+/* Добавляем иконку документа к индикатору */
+.readme-indicator i {
+    margin-right: 4px;
+    font-size: 0.7rem;
+}
+
+/* Эффект пульсации при появлении */
+@keyframes gentle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.project-card:hover .readme-indicator {
+    animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+/* Resume Section */
+.resume-preview {
+    background: linear-gradient(135deg, rgba(45, 27, 105, 0.3), rgba(15, 11, 35, 0.6));
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.skill-category {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-orange);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+}
+
+.skill-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.skill-category h3 {
+    color: var(--neon-orange);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.skill-category p {
+    color: var(--gray-text);
+    line-height: 1.5;
+}
+
+/* Contacts Section */
+#contacts {
+    text-align: center;
+    background: var(--darker-bg);
+}
+
+.contact-links {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    color: var(--gray-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.contact-link:hover {
+    color: var(--neon-orange);
+    background: rgba(255, 107, 53, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Анимации */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Иконки для языков программирования */
+.fa-golang {
+    color: #00ADD8;
+}
+
+.fa-java {
+    color: #5382A1;
+}
+
+.fa-star {
+    color: var(--neon-orange);
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-bg {
+        display: none;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
+
     .group-title {
         font-size: 1.5rem;
     }
+
+    .readme-indicator {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* Стили для активного состояния навигации */
+.nav-active {
+    background: rgba(15, 11, 35, 0.98) !important;
+}
+
+/* Стили для появления элементов при скролле */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tech-divider {
+    height: 1px;
+    background: rgba(255, 107, 53, 0.2);
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.tech-tag {
+    display: inline-block;
+    background: rgba(255, 107, 53, 0.15);
+    color: var(--neon-orange);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    margin: 0.2rem 0.2rem 0 0;
+    white-space: nowrap;
+}
+
+.fa-server {
+    color: #5382A1;
 }

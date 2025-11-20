@@ -1,23 +1,20 @@
 import React from 'react';
-import '../styles/ContactsSection.css';
+import '../styles/AboutSection.css';
 
 function ContactsSection() {
     return (
         <section id="contacts">
             <h2>Давайте построим что-то вместе</h2>
-            <p className="section-subtitle">
-                Всегда открыт к обсуждению возможностей, проектов или просто интересному разговору о бэкенде.
-            </p>
-
-            <div className="contact-links">
-                <a href="https://t.me/Sun1tAr" className="contact-link telegram-btn" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-telegram"></i> Написать в Telegram
+            <p class="section-subtitle">Всегда открыт к обсуждению возможностей, проектов или просто интересному разговору о бэкенде.</p>
+            <a href="https://t.me/Sun1tAr" class="btn btn-primary telegram-btn">
+                <i class="fab fa-telegram"></i> Написать в Telegram
+            </a>
+            <div class="contact-links">
+                <a href="mailto:Sun1tAr@yandex.ru" class="contact-link">
+                    <i class="fas fa-envelope"></i> Sun1tAr@yandex.ru
                 </a>
-                <a href="mailto:Sun1tAr@yandex.ru" className="contact-link">
-                    <i className="fas fa-envelope"></i> Sun1tAr@yandex.ru
-                </a>
-                <a href="https://github.com/Sun1tAr" className="contact-link" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-github"></i> github.com/Sun1tAr
+                <a href="https://github.com/Sun1tAr" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> github.com/Sun1tAr
                 </a>
             </div>
         </section>
