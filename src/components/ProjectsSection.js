@@ -70,6 +70,22 @@ function ProjectsSection() {
             repo: "MIREA-FFJ-Practice-8",
             readme: true,
             icon: "fas fa-leaf"
+        },
+        {
+            title: "Practice 9 • Аутентификация и авторизация в Spring Boot",
+            desc: "REST API сервис с реализацией механизма аутентификации и авторизации пользователей на основе Spring Security",
+            techs: ["Java", "Spring Boot", "Spring Web", "Spring Security", "Spring Data JPA", "PostgreSQL", "BCrypt", "Lombok"],
+            repo: "MIREA-FFJ-Practice-9",
+            readme: true,
+            icon: "fas fa-shield"
+        },
+        {
+            title: "Practice 10 • JWT Токены и Refresh Token Механизм",
+            desc: "REST API сервис с реализацией сложного механизма аутентификации и авторизации с использованием JWT и Refresh Token механизма",
+            techs: ["Java", "Spring Boot", "Spring Security", "Spring Data JPA", "PostgreSQL", "Redis", "JJWT", "Maven"],
+            repo: "MIREA-FFJ-Practice-10",
+            readme: true,
+            icon: "fas fa-key"
         }
     ]
 
