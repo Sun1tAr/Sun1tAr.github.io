@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/AboutSection.css';
 
+
+
 function ProjectsSection() {
     function openProject(repoName) {
         const githubUrl = `https://github.com/Sun1tAr/${repoName}`;
