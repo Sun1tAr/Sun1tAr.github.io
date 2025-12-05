@@ -204,6 +204,38 @@ function ProjectsSection() {
             repo: "MIREA-TIP-Practice-12",
             readme: true,
             icon: "fab fa-golang"
+        },
+        {
+            title: "Practice 13 • Профилирование Go-приложения (pprof)",
+            desc: "Практическое занятие по профилированию производительности Go с использованием встроенного pprof для анализа CPU, Heap, Goroutine профилей и оптимизации узких мест",
+            techs: ["Go", "pprof", "CPU Profiling", "Heap Analysis", "Benchmarking", "Goroutine Profiling", "Performance Optimization", "Flame Graphs"],
+            repo: "MIREA-TIP-Practice-13",
+            readme: true,
+            icon: "fas fa-fire"
+        },
+        {
+            title: "Practice 14 • Connection Pool и оптимизации БД",
+            desc: "Практическая работа по оптимизации работы с PostgreSQL: Connection Pool, Keyset-пагинация, батчинг для избежания N+1, полнотекстовый поиск с GIN индексами и нагрузочное тестирование",
+            techs: ["Go", "PostgreSQL", "Connection Pool", "Keyset Cursor", "Batching", "GIN Index", "Full-Text Search", "Performance Testing"],
+            repo: "MIREA-TIP-Practice-14",
+            readme: true,
+            icon: "fas fa-tachometer-alt"
+        },
+        {
+            title: "Practice 15 • Unit-тестирование функций в Go",
+            desc: "Практическое занятие по unit-тестированию в Go с использованием встроенного пакета testing, testify, табличных тестов и измерением покрытия кода",
+            techs: ["Go", "testing", "testify", "Table-Driven Tests", "Stubs", "Benchmarks", "Code Coverage", "assert/require"],
+            repo: "MIREA-TIP-Practice-15",
+            readme: true,
+            icon: "fas fa-flask"
+        },
+        {
+            title: "Practice 16 • Интеграционное тестирование API с Docker",
+            desc: "Практическая работа по интеграционному тестированию REST API на Go с использованием Docker, docker-compose и testcontainers для изолированного тестирования CRUD операций",
+            techs: ["Go", "REST API", "Gin", "PostgreSQL", "Docker", "testcontainers", "Integration Testing", "Migrations"],
+            repo: "MIREA-TIP-Practice-16",
+            readme: true,
+            icon: "fas fa-cube"
         }
     ];
 
