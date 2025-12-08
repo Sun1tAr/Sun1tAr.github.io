@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
-import ProjectsSection from './components/ProjectsSection';
+import ProjectsPage from './components/ProjectsPage';
 import ResumeSection from './components/ResumeSection';
 import ContactsSection from './components/ContactsSection';
 import './styles/App.css';
@@ -15,10 +15,7 @@ function App() {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
@@ -32,7 +29,6 @@ function App() {
                 nav.classList.remove('nav-active');
             }
         };
-
         window.addEventListener('scroll', handleScroll);
 
         // Анимация появления элементов при скролле
@@ -49,27 +45,10 @@ function App() {
             });
         }, observerOptions);
 
-        // Анимация появления карточек проектов
-        const projectCards = document.querySelectorAll('.project-card');
-        const projectObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        projectCards.forEach(card => {
-            projectObserver.observe(card);
-        });
-
-        // Наблюдаем за всеми элементами с классом fade-in
-        const elementsToAnimate = document.querySelectorAll('.skill-category, .resume-preview, .about-content');
+        // Анимация появления элементов
+        const elementsToAnimate = document.querySelectorAll(
+            '.skill-category, .resume-preview, .about-content, .projects-page'
+        );
         elementsToAnimate.forEach(element => {
             element.classList.add('fade-in');
             observer.observe(element);
@@ -78,7 +57,6 @@ function App() {
         // Обработка мобильного меню
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', function() {
                 if (navLinks.style.display === 'flex') {
@@ -97,12 +75,6 @@ function App() {
             });
         }
 
-        // Делаем карточки доступными для таб-навигации
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('role', 'button');
-        });
-
         // Параллакс эффект для hero section
         const handleParallax = () => {
             const scrolled = window.pageYOffset;
@@ -111,7 +83,6 @@ function App() {
                 hero.style.transform = `translateY(${scrolled * 0.5}px)`;
             }
         };
-
         window.addEventListener('scroll', handleParallax);
 
         return () => {
@@ -125,7 +96,9 @@ function App() {
             <Navigation />
             <HeroSection />
             <AboutSection />
-            <ProjectsSection />
+            <section id="projects">
+                <ProjectsPage />
+            </section>
             <ResumeSection />
             <ContactsSection />
         </div>
