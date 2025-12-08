@@ -1,6 +1,14 @@
+// ProjectSearch.js
 import React, { useMemo, useState } from 'react';
 
-export default function ProjectSearch({ onSearch, onFilter, projectsData }) {
+export default function ProjectSearch({
+                                          onSearch,
+                                          onFilter,
+                                          projectsData,
+                                          searchInputRef,
+                                          searchValue,  // НОВОЕ: пропс для значения поиска
+                                          onSearchChange  // НОВОЕ: пропс для обновления
+                                      }) {
     const categories = [
         { id: 'all', label: 'Все проекты' },
         { id: 'java', label: 'Java' },
@@ -27,26 +35,50 @@ export default function ProjectSearch({ onSearch, onFilter, projectsData }) {
         onFilter(filterId);
     };
 
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        onSearchChange(value);  // ИЗМЕНЕНО: передаём в родителя
+    };
+
+    const handleClearSearch = () => {
+        onSearchChange('');  // ИЗМЕНЕНО
+        if (searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    };
+
     return (
         <div className="search-container">
             <div className="search-box">
-                <input
-                    type="text"
-                    className="search-input"
-                    placeholder="Поиск по названию, описанию или технологиям..."
-                    onChange={(e) => onSearch(e.target.value)}
-                />
+                <div className="search-input-wrapper">
+                    <input
+                        ref={searchInputRef}
+                        type="text"
+                        className="search-input"
+                        placeholder="Поиск по названию, описанию или технологиям..."
+                        value={searchValue}  // ИЗМЕНЕНО: берём из пропса
+                        onChange={handleSearchChange}
+                    />
+                    {searchValue && (  // ИСПРАВЛЕНО: теперь будет видна при любом тексте
+                        <button
+                            className="search-clear-btn"
+                            onClick={handleClearSearch}
+                            title="Очистить поиск"
+                        >
+                            <i className="fas fa-times"></i>
+                        </button>
+                    )}
+                </div>
             </div>
-
             <div className="filter-buttons">
-                {categories.map(cat => (
+                {categories.map(category => (
                     <button
-                        key={cat.id}
-                        className={`filter-btn ${activeFilter === cat.id ? 'active' : ''}`}
-                        onClick={() => handleFilterClick(cat.id)}
+                        key={category.id}
+                        className={`filter-btn ${activeFilter === category.id ? 'active' : ''}`}
+                        onClick={() => handleFilterClick(category.id)}
                     >
-                        {cat.label}
-                        <span className="filter-count">{counts[cat.id]}</span>
+                        {category.label}
+                        <span className="filter-count">{counts[category.id]}</span>
                     </button>
                 ))}
             </div>

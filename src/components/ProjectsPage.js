@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+// ProjectsPage.js
+import React, { useState, useMemo, useRef } from 'react';
 import projectsData from '../data/projectsData';
 import ProjectSearch from './ProjectSearch';
 import '../styles/ProjectsPage.css';
@@ -6,6 +7,7 @@ import '../styles/ProjectsPage.css';
 export default function ProjectsPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('all');
+    const searchInputRef = useRef(null);
 
     // Flatten projects with category
     const allProjects = useMemo(() => {
@@ -25,7 +27,6 @@ export default function ProjectsPage() {
                 project.title.toLowerCase().includes(searchLower) ||
                 project.desc.toLowerCase().includes(searchLower) ||
                 project.techs.some(t => t.toLowerCase().includes(searchLower));
-
             return matchesFilter && matchesSearch;
         });
     }, [searchQuery, activeFilter, allProjects]);
@@ -69,24 +70,32 @@ export default function ProjectsPage() {
         window.open(website, '_blank');
     };
 
+    const handleTechTagClick = (techName) => {
+        setSearchQuery(techName);  // ИСПРАВЛЕНО: обновляем состояние родителя
+        if (searchInputRef.current) {
+            searchInputRef.current.value = techName;
+        }
+    };
+
     return (
         <div className="projects-page">
-            <h2>Лаборатория идей</h2>
-            <p className="section-subtitle">Здесь я оттачиваю мастерство через практику и пет-проекты</p>
             <ProjectSearch
                 onSearch={setSearchQuery}
                 onFilter={setActiveFilter}
                 projectsData={projectsData}
+                searchInputRef={searchInputRef}
+                searchValue={searchQuery}  // НОВОЕ: передаём значение
+                onSearchChange={setSearchQuery}  // НОВОЕ: передаём обработчик
             />
 
-            <div className="projects-container">
-                {Object.keys(groupedProjects).length === 0 ? (
-                    <div className="empty-state">
-                        <i className="fas fa-search"></i>
-                        <p>Проекты не найдены</p>
-                    </div>
-                ) : (
-                    Object.entries(groupedProjects).map(([category, projects]) => (
+            {filteredProjects.length === 0 ? (
+                <div className="empty-state">
+                    <i className="fas fa-search"></i>
+                    <p>Проекты не найдены</p>
+                </div>
+            ) : (
+                <div className="projects-container">
+                    {Object.entries(groupedProjects).map(([category, projects]) => (
                         <div key={category} className="projects-section">
                             <div className="section-header">
                                 <div className="section-title-wrapper">
@@ -104,13 +113,20 @@ export default function ProjectsPage() {
                                                 <i className={project.icon}></i>
                                             </div>
                                         </div>
-
                                         <h3 className="project-title">{project.title}</h3>
                                         <p className="project-desc">{project.desc}</p>
 
                                         <div className="tech-tags">
                                             {project.techs.map((tech, i) => (
-                                                <span key={i} className="project-tech">{tech}</span>
+                                                <span
+                                                    key={i}
+                                                    className="project-tech"
+                                                    onClick={() => handleTechTagClick(tech)}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                >
+                          {tech}
+                        </span>
                                             ))}
                                         </div>
 
@@ -118,17 +134,14 @@ export default function ProjectsPage() {
                                             <button
                                                 className="action-btn btn-readme"
                                                 onClick={() => handleOpenProject(project)}
-                                                title={project.readme ? 'Открыть README' : 'Открыть репозиторий'}
                                             >
                                                 <i className={`fas fa-${project.readme ? 'file-alt' : 'code-branch'}`}></i>
                                                 {project.readme ? 'README' : 'Repo'}
                                             </button>
-
                                             {project.website && (
                                                 <button
                                                     className="action-btn btn-website"
                                                     onClick={() => handleOpenWebsite(project.website)}
-                                                    title="Открыть веб-сайт"
                                                 >
                                                     <i className="fas fa-globe"></i>
                                                     Website
@@ -139,9 +152,9 @@ export default function ProjectsPage() {
                                 ))}
                             </div>
                         </div>
-                    ))
-                )}
-            </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
