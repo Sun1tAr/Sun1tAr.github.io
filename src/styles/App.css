@@ -517,3 +517,95 @@ h2::after {
         font-size: 1rem;
     }
 }
+
+/* ===== МОБИЛЬНЫЕ АДАПТИВЫ ===== */
+
+@media (max-width: 768px) {
+    /* Скрываем circuit-animation на мобильных */
+    .circuit-animation {
+        display: none !important;
+    }
+
+    /* Добавляем padding к body чтобы текст не перекрывался навигацией */
+    body {
+        padding-top: 80px;
+    }
+
+    /* Увеличиваем padding для hero чтобы текст был ниже навигации */
+    #hero {
+        padding-top: 2rem !important;
+        margin-top: 60px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    section {
+        padding: 3rem 1.5rem;
+    }
+
+    nav {
+        padding: 1rem 0;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(15, 11, 35, 0.98);
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-frame {
+        height: 300px;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 2rem 1rem;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
