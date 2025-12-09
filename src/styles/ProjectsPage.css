@@ -1,0 +1,497 @@
+/* ===== VARIABLES ===== */
+:root {
+    --dark-bg: #0f0b23;
+    --darker-bg: #1a1538;
+    --neon-orange: #ff6b35;
+    --neon-orange-light: #ff8e53;
+    --light-text: #e8e6f0;
+    --gray-text: #a8a6b3;
+    --cream-text: #e8e6f0;
+    /* Go blue color */
+    --go-blue: #00A3E0;
+    /* Soft green - harmonizes with the color palette */
+    --soft-green: #5AE8B8;
+    /* Subtle blue for buttons */
+    --button-teal: #4A9DBD;
+    /* Light text white for search buttons */
+    --white-text: #FFFFFF;
+}
+
+/* ===== PROJECTS PAGE ===== */
+.projects-page {
+    padding: 2rem 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ===== SEARCH CONTAINER ===== */
+.search-container {
+    background: linear-gradient(135deg, rgba(45, 27, 105, 0.3), rgba(15, 11, 35, 0.6));
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(90, 232, 184, 0.2);
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+}
+
+.search-box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.8rem 1.2rem;
+    background: rgba(15, 11, 35, 0.8);
+    border: 1px solid rgba(74, 157, 189, 0.4);
+    border-radius: 8px;
+    color: var(--light-text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--button-teal);
+    box-shadow: 0 0 15px rgba(74, 157, 189, 0.3);
+    background: rgba(15, 11, 35, 0.95);
+}
+
+.search-input::placeholder {
+    color: var(--gray-text);
+}
+
+/* ===== FILTER BUTTONS ===== */
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-btn {
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    color: var(--light-text);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: transparent;
+    border-color: var(--neon-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.filter-btn.active {
+    background: transparent;
+    border-color: var(--neon-orange);
+    color: var(--light-text);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+}
+
+.filter-count {
+    display: inline-block;
+    background: rgba(255, 107, 53, 0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.filter-btn.active .filter-count {
+    background: rgba(255, 107, 53, 0.3);
+}
+
+/* ===== PROJECTS CONTAINER ===== */
+.projects-container {
+    width: 100%;
+}
+
+/* ===== PROJECTS SECTION ===== */
+.projects-section {
+    margin-bottom: 4rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 107, 53, 0.2);
+}
+
+.section-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Section icons - cream color */
+.section-icon {
+    font-size: 1.5rem;
+    color: var(--cream-text);
+}
+
+/* Section headers - cream color (simple, no gradient) */
+.section-header h2 {
+    font-size: 1.8rem;
+    color: var(--cream-text);
+    margin: 0;
+    font-weight: 600;
+}
+
+.section-badge {
+    background: rgba(0, 163, 224, 0.15);
+    border: 1px solid rgba(0, 163, 224, 0.4);
+    color: var(--go-blue);
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    min-width: 50px;
+    text-align: center;
+}
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+
+.search-input {
+    padding-right: 2.5rem; /* место для кнопки X */
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 0.8rem;
+    background: transparent;
+    border: none;
+    color: var(--gray-text);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.search-clear-btn:hover {
+    color: var(--neon-orange);
+}
+
+
+/* ===== PROJECTS GRID ===== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.project-card {
+    background: linear-gradient(135deg, rgba(45, 27, 105, 0.3), rgba(15, 11, 35, 0.6));
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--neon-orange);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.project-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, var(--neon-orange), var(--neon-orange-light));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    color: white;
+}
+
+.project-title {
+    font-size: 1.2rem;
+    color: var(--light-text);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.project-desc {
+    color: var(--gray-text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+    flex-grow: 1;
+}
+
+/* ===== TECH TAGS ===== */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.project-tech {
+    display: inline-block;
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--neon-orange);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    transition: all 0.3s ease;
+}
+
+.project-tech:hover {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: var(--neon-orange);
+}
+
+/* ===== ACTION BUTTONS ===== */
+.project-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* README button - Go blue color */
+.action-btn.btn-readme {
+    background: rgba(0, 163, 224, 0.15);
+    border: 1px solid rgba(0, 163, 224, 0.4);
+    color: var(--go-blue);
+}
+
+.action-btn.btn-readme:hover {
+    background: var(--go-blue);
+    color: var(--dark-bg);
+    border-color: var(--go-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 163, 224, 0.3);
+}
+
+/* Website button - Soft green color */
+.action-btn.btn-website {
+    background: rgba(90, 232, 184, 0.15);
+    border: 1px solid rgba(90, 232, 184, 0.4);
+    color: var(--soft-green);
+}
+
+.action-btn.btn-website:hover {
+    background: var(--soft-green);
+    color: var(--dark-bg);
+    border-color: var(--soft-green);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(90, 232, 184, 0.3);
+}
+
+/* Base action button styles */
+.action-btn {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 36px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--gray-text);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-page {
+        padding: 1rem;
+    }
+
+    .search-container {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .filter-buttons {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .filter-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.8rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .project-card {
+        padding: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+    }
+
+    .project-desc {
+        font-size: 0.85rem;
+    }
+
+    .action-btn {
+        font-size: 0.75rem;
+        padding: 0.6rem 0.8rem;
+        min-height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-page {
+        padding: 0.5rem;
+    }
+
+    .search-container {
+        padding: 1rem;
+    }
+
+    .filter-buttons {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .filter-count {
+        display: none;
+    }
+
+    .project-card {
+        padding: 1rem;
+    }
+
+    .project-title {
+        font-size: 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.3rem;
+    }
+}
