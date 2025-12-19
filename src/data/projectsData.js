@@ -87,9 +87,27 @@ export default {
             repo: "MIREA-FFJ-Practice-10",
             readme: true,
             website: "",
+            icon: "fas fa-key"
+        },
+        {
+            title: "Practice 11 • JWT Токены и Refresh Token Механизм",
+            desc: "REST API сервис для управления заметками с двухуровневой JWT аутентификацией. Реализует ACCESS и REFRESH токены с разными TTL, хранение refresh token в Redis с автоматическим удалением, функции регистрации, входа, logout и полный CRUD для заметок (CREATE, READ, UPDATE PUT/PATCH, DELETE) с защитой Bearer token.",
+            techs: ["Java", "Spring Boot", "Spring Security", "Spring Data JPA", "Spring Data Redis", "PostgreSQL", "Redis", "JJWT", "BCrypt", "Maven"],
+            repo: "MIREA-FFJ-Practice-11",
+            readme: true,
             website: "",
             icon: "fas fa-key"
+        },
+        {
+            title: "Practice 12 • REST API с OpenAPI/Swagger документацией",
+            desc: "Развитие Practice-11 с интеграцией SpringDoc OpenAPI 2.8.5 для автоматической генерации интерактивной Swagger UI документации. Все контроллеры и DTO аннотированы для самодокументирования API. Доступна полная документация с примерами запросов/ответов, прямое тестирование через Try-it-out и экспорт OpenAPI schema.",
+            techs: ["Java", "Spring Boot", "Spring Security", "Spring Data Redis", "PostgreSQL", "Redis", "JJWT", "SpringDoc OpenAPI", "Swagger UI", "Maven"],
+            repo: "MIREA-FFJ-Practice-12",
+            readme: true,
+            website: "",
+            icon: "fas fa-book"
         }
+
         
     ],
     go: [
