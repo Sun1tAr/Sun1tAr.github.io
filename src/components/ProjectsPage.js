@@ -79,6 +79,19 @@ export default function ProjectsPage() {
 
     return (
         <div className="projects-page">
+        <h2>Лаборатория идей</h2>
+                    <p className="section-subtitle">Здесь я оттачиваю мастерство через практику и пет-проекты:
+                    <ul>
+                    <li><b>Java</b> - в данной вкладке собраны учебные проекты, реализованные на языке Java</li>
+                    <li><b>Go</b> - в данной вкладке собраны учебные проекты, реализованные на языке Go</li>
+                    <li><b>Pet Projects</b> - в данной вкладке представлены проекты, которые предназначены для решения
+                    какой-то пользовательской проблемы. По мере изучения технологий эти проекты дорабатываются до уровня
+                    <i> production - ready</i>.
+
+                    </li>
+                    <li></li>
+                    <li></li>
+                    </ul></p>
             <ProjectSearch
                 onSearch={setSearchQuery}
                 onFilter={setActiveFilter}
