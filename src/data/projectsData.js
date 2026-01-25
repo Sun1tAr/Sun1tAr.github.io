@@ -280,7 +280,7 @@ export default {
         {
             title: "Trip Builder - Конструктор путешествий (Preview)",
             desc: "Веб-приложение для создания, планирования и обмена путешествиями.",
-            techs: ["React", "React Router", "Vite", "CSS", "Context API", "Компонентная архитектура", "Docker", "Nginx"],
+            techs: ["React", "React Router", "Vite", "CSS", "Context API", "Компонентная архитектура", "Docker", "Nginx", "FT"],
             repo: "MIREA-TripBuilder-FrontEnd",
             readme: true,
             website: "http://denchik2376.fvds.ru/MIREA-TripBuilder-FrontEnd/",
