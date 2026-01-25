@@ -248,14 +248,25 @@
     box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
 }
 
+/*.project-header {*/ todo
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: flex-start;*/
+/*    margin-bottom: 1rem;*/
+/*    position: relative;*/
+/*    z-index: 1;*/
+/*}*/
+
 .project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 1;
+  position: relative;  /* ← ВАЖНО! для позиционирования стикера */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border-light);
 }
+
 
 .project-icon {
     width: 50px;

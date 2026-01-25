@@ -3,11 +3,14 @@ import React, { useState, useMemo, useRef } from 'react';
 import projectsData from '../data/projectsData';
 import ProjectSearch from './ProjectSearch';
 import '../styles/ProjectsPage.css';
+import { PROJECT_BADGE_TAG, PROJECT_BADGE_IMAGE } from '../constants/projectConstants';
+import ProjectBadge from './ProjectBadge';
 
 export default function ProjectsPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('all');
     const searchInputRef = useRef(null);
+
 
     // Flatten projects with category
     const allProjects = useMemo(() => {
@@ -61,6 +64,10 @@ export default function ProjectsPage() {
         return icons[category] || 'fas fa-folder';
     };
 
+    const hasProjectBadge = (project) => {
+        return project.techs.includes(PROJECT_BADGE_TAG);
+    };
+
     const handleOpenProject = (project) => {
         const url = `https://github.com/Sun1tAr/${project.repo}`;
         window.open(url, '_blank');
@@ -81,16 +88,19 @@ export default function ProjectsPage() {
         <div className="projects-page">
         <h2>Лаборатория идей</h2>
                     <p className="section-subtitle">Здесь я оттачиваю мастерство через практику и пет-проекты:
-                    <ul>
-                    <li><b>Java</b> - в данной вкладке собраны учебные проекты, реализованные на языке Java</li>
-                    <li><b>Go</b> - в данной вкладке собраны учебные проекты, реализованные на языке Go</li>
-                    <li><b>Pet Projects</b> - в данной вкладке представлены проекты, которые предназначены для решения
-                    какой-то пользовательской проблемы. По мере изучения технологий эти проекты дорабатываются до уровня
-                    <i> production - ready</i>.
+                    <ul type = "none">
+                    <li><b>Java / Go </b> - в данных вкладках представлены учебные Backend - проекты,
+                        реализованные на указанных языках.
+                    </li>
+
+                    <li><b>Frontend</b> - в данной вкладке представлены учебные проекты, основой которых является
+                        создание клиентской части приложения.
+                    </li>
+
+                    <li><b>Pet Projects</b> - в данной вкладке представлены проекты, целью которых является
+                        решение какой-то конкретной проблемы или отработка новых технологий.
 
                     </li>
-                    <li></li>
-                    <li></li>
                     </ul></p>
             <ProjectSearch
                 onSearch={setSearchQuery}
@@ -125,6 +135,7 @@ export default function ProjectsPage() {
                                             <div className="project-icon">
                                                 <i className={project.icon}></i>
                                             </div>
+                                            {hasProjectBadge(project) && <ProjectBadge />}
                                         </div>
                                         <h3 className="project-title">{project.title}</h3>
                                         <p className="project-desc">{project.desc}</p>
