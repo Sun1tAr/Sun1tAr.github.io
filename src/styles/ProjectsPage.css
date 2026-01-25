@@ -198,6 +198,7 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
+    align-items: start;  /* ← ДОБАВЬ ЭТО */
 }
 
 .project-card {
@@ -214,6 +215,7 @@
     flex-direction: column;
     animation: slideIn 0.5s ease forwards;
     opacity: 0;
+    height: 100%;  /* ← ДОБАВЬ ЭТО */
 }
 
 @keyframes slideIn {

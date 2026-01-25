@@ -36,11 +36,11 @@
     white-space: normal;
     z-index: 9999;
     max-width: 320px;
-    min-width: 280px;
+    min-width: 320px;
 
     right: 50%;
-    margin-right: 0px;
-    top: 340%;                          /* <-- Менять если менялся текст окна */
+    margin-right: -25px;
+    top: 330%;                          /* <-- Менять если менялся текст окна */
     transform: translateY(-50%);
 
     backdrop-filter: blur(150px);
