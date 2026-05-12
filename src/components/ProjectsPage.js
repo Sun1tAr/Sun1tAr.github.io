@@ -87,98 +87,88 @@ export default function ProjectsPage() {
     return (
         <div className="projects-page">
         <h2>Лаборатория идей</h2>
-                    <p className="section-subtitle">Здесь я оттачиваю мастерство через практику и пет-проекты:
-                    <ul type = "none">
-                    <li><b>Java / Go </b> - в данных вкладках представлены учебные Backend - проекты,
-                        реализованные на указанных языках.
-                    </li>
+                    <p className="section-subtitle">
+                        Секция проектов на текущий момент находится в разработке,
+                        для запроса дополнительной информации о текущих проектах обратитесь ко мне с помощью контактной
+                        секции.
+                    </p>
+        {/*    <ProjectSearch*/}
+        {/*        onSearch={setSearchQuery}*/}
+        {/*        onFilter={setActiveFilter}*/}
+        {/*        projectsData={projectsData}*/}
+        {/*        searchInputRef={searchInputRef}*/}
+        {/*        searchValue={searchQuery}  // НОВОЕ: передаём значение*/}
+        {/*        onSearchChange={setSearchQuery}  // НОВОЕ: передаём обработчик*/}
+        {/*    />*/}
 
-                    <li><b>Frontend</b> - в данной вкладке представлены учебные проекты, основой которых является
-                        создание клиентской части приложения.
-                    </li>
+        {/*    {filteredProjects.length === 0 ? (*/}
+        {/*        <div className="empty-state">*/}
+        {/*            <i className="fas fa-search"></i>*/}
+        {/*            <p>Проекты не найдены</p>*/}
+        {/*        </div>*/}
+        {/*    ) : (*/}
+        {/*        <div className="projects-container">*/}
+        {/*            {Object.entries(groupedProjects).map(([category, projects]) => (*/}
+        {/*                <div key={category} className="projects-section">*/}
+        {/*                    <div className="section-header">*/}
+        {/*                        <div className="section-title-wrapper">*/}
+        {/*                            <i className={`section-icon ${getCategoryIcon(category)}`}></i>*/}
+        {/*                            <h2>{getCategoryName(category)}</h2>*/}
+        {/*                        </div>*/}
+        {/*                        <span className="section-badge">{projects.length}</span>*/}
+        {/*                    </div>*/}
 
-                    <li><b>Pet Projects</b> - в данной вкладке представлены проекты, целью которых является
-                        решение какой-то конкретной проблемы или отработка новых технологий.
+        {/*                    <div className="projects-grid">*/}
+        {/*                        {projects.map((project, idx) => (*/}
+        {/*                            <div key={idx} className="project-card">*/}
+        {/*                                <div className="project-header">*/}
+        {/*                                    <div className="project-icon">*/}
+        {/*                                        <i className={project.icon}></i>*/}
+        {/*                                    </div>*/}
+        {/*                                    {hasProjectBadge(project) && <ProjectBadge />}*/}
+        {/*                                </div>*/}
+        {/*                                <h3 className="project-title">{project.title}</h3>*/}
+        {/*                                <p className="project-desc">{project.desc}</p>*/}
 
-                    </li>
-                    </ul></p>
-            <ProjectSearch
-                onSearch={setSearchQuery}
-                onFilter={setActiveFilter}
-                projectsData={projectsData}
-                searchInputRef={searchInputRef}
-                searchValue={searchQuery}  // НОВОЕ: передаём значение
-                onSearchChange={setSearchQuery}  // НОВОЕ: передаём обработчик
-            />
+        {/*                                <div className="tech-tags">*/}
+        {/*                                    {project.techs.map((tech, i) => (*/}
+        {/*                                        <span*/}
+        {/*                                            key={i}*/}
+        {/*                                            className="project-tech"*/}
+        {/*                                            onClick={() => handleTechTagClick(tech)}*/}
+        {/*                                            role="button"*/}
+        {/*                                            tabIndex={0}*/}
+        {/*                                        >*/}
+        {/*                  {tech}*/}
+        {/*                </span>*/}
+        {/*                                    ))}*/}
+        {/*                                </div>*/}
 
-            {filteredProjects.length === 0 ? (
-                <div className="empty-state">
-                    <i className="fas fa-search"></i>
-                    <p>Проекты не найдены</p>
-                </div>
-            ) : (
-                <div className="projects-container">
-                    {Object.entries(groupedProjects).map(([category, projects]) => (
-                        <div key={category} className="projects-section">
-                            <div className="section-header">
-                                <div className="section-title-wrapper">
-                                    <i className={`section-icon ${getCategoryIcon(category)}`}></i>
-                                    <h2>{getCategoryName(category)}</h2>
-                                </div>
-                                <span className="section-badge">{projects.length}</span>
-                            </div>
-
-                            <div className="projects-grid">
-                                {projects.map((project, idx) => (
-                                    <div key={idx} className="project-card">
-                                        <div className="project-header">
-                                            <div className="project-icon">
-                                                <i className={project.icon}></i>
-                                            </div>
-                                            {hasProjectBadge(project) && <ProjectBadge />}
-                                        </div>
-                                        <h3 className="project-title">{project.title}</h3>
-                                        <p className="project-desc">{project.desc}</p>
-
-                                        <div className="tech-tags">
-                                            {project.techs.map((tech, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="project-tech"
-                                                    onClick={() => handleTechTagClick(tech)}
-                                                    role="button"
-                                                    tabIndex={0}
-                                                >
-                          {tech}
-                        </span>
-                                            ))}
-                                        </div>
-
-                                        <div className="project-actions">
-                                            <button
-                                                className="action-btn btn-readme"
-                                                onClick={() => handleOpenProject(project)}
-                                            >
-                                                <i className={`fas fa-${project.readme ? 'file-alt' : 'code-branch'}`}></i>
-                                                {project.readme ? 'README' : 'Repo'}
-                                            </button>
-                                            {project.website && (
-                                                <button
-                                                    className="action-btn btn-website"
-                                                    onClick={() => handleOpenWebsite(project.website)}
-                                                >
-                                                    <i className="fas fa-globe"></i>
-                                                    Website
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+        {/*                                <div className="project-actions">*/}
+        {/*                                    <button*/}
+        {/*                                        className="action-btn btn-readme"*/}
+        {/*                                        onClick={() => handleOpenProject(project)}*/}
+        {/*                                    >*/}
+        {/*                                        <i className={`fas fa-${project.readme ? 'file-alt' : 'code-branch'}`}></i>*/}
+        {/*                                        {project.readme ? 'README' : 'Repo'}*/}
+        {/*                                    </button>*/}
+        {/*                                    {project.website && (*/}
+        {/*                                        <button*/}
+        {/*                                            className="action-btn btn-website"*/}
+        {/*                                            onClick={() => handleOpenWebsite(project.website)}*/}
+        {/*                                        >*/}
+        {/*                                            <i className="fas fa-globe"></i>*/}
+        {/*                                            Website*/}
+        {/*                                        </button>*/}
+        {/*                                    )}*/}
+        {/*                                </div>*/}
+        {/*                            </div>*/}
+        {/*                        ))}*/}
+        {/*                    </div>*/}
+        {/*                </div>*/}
+        {/*            ))}*/}
+        {/*        </div>*/}
+        {/*    )}*/}
         </div>
     );
 }
